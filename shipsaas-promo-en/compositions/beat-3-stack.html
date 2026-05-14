@@ -1,0 +1,401 @@
+<template id="beat-3-stack-template">
+  <div id="beat-3-stack" data-composition-id="beat-3-stack" data-start="0" data-duration="9.05" data-width="1920" data-height="1080">
+    <div class="scene-root">
+      <div class="bg-shot-wrap">
+        <img class="bg-shot" src="../capture/screenshots/scroll-067.png" alt="ShipSaaS workflow screenshot" />
+      </div>
+      <div class="grid"></div>
+      <div class="world-glow"></div>
+
+      <div class="scene-content">
+        <div class="header-block">
+          <div class="eyebrow">MODERN STACK</div>
+          <h2 class="headline">Built for real products. Ready for global launch.</h2>
+        </div>
+
+        <div class="track-row track-row-a">
+          <div class="track track-a">
+            <div class="pill">Next.js 16</div>
+            <div class="pill">React 19</div>
+            <div class="pill">Tailwind v4</div>
+            <div class="pill">Drizzle ORM</div>
+            <div class="pill">Better Auth</div>
+            <div class="pill">Stripe</div>
+            <div class="pill">tRPC</div>
+          </div>
+        </div>
+
+        <div class="track-row track-row-b">
+          <div class="track track-b">
+            <div class="pill accent">Cloudflare Edge</div>
+            <div class="pill">Vercel Ready</div>
+            <div class="pill">SEO Docs</div>
+            <div class="pill">Fumadocs</div>
+            <div class="pill">Resend</div>
+            <div class="pill">Magic UI</div>
+            <div class="pill">Shadcn UI</div>
+          </div>
+        </div>
+
+        <div class="main-row">
+          <div class="terminal-wrap">
+            <div class="terminal-top">
+              <span class="dot red"></span>
+              <span class="dot amber"></span>
+              <span class="dot green"></span>
+              <span class="terminal-label">&gt; terminal - shipsaas</span>
+            </div>
+            <div class="terminal-body">
+              <div class="term-line line-1">git clone git@github.com:shipsaasnet/shipsaas my-project</div>
+              <div class="term-line line-2">pnpm install &amp;&amp; pnpm dev</div>
+              <div class="term-line line-3">Next.js 16.2.5 (Turbopack)</div>
+              <div class="term-line line-4">Live at http://localhost:3000</div>
+            </div>
+          </div>
+
+          <div class="launch-panel">
+            <div class="launch-chip">GLOBAL LAUNCH</div>
+            <div class="launch-copy">Edge-optimized for Cloudflare and Vercel, with millisecond response worldwide.</div>
+            <div class="pulse pulse-a"></div>
+            <div class="pulse pulse-b"></div>
+            <div class="pulse pulse-c"></div>
+            <div class="orbit orbit-a"></div>
+            <div class="orbit orbit-b"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      @font-face {
+        font-family: "ShipSans";
+        src: url("../capture/assets/fonts/pxiEyp8kv8JHgFVrFJA.ttf");
+        font-weight: 400;
+      }
+
+      @font-face {
+        font-family: "ShipSans";
+        src: url("../capture/assets/fonts/pxiByp8kv8JHgFVrLCz7V1s.ttf");
+        font-weight: 700;
+      }
+
+      @font-face {
+        font-family: "ShipMono";
+        src: url("../capture/assets/fonts/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vqPQw.ttf");
+        font-weight: 400;
+      }
+
+      @font-face {
+        font-family: "ShipMono";
+        src: url("../capture/assets/fonts/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_Of2PQw.ttf");
+        font-weight: 700;
+      }
+
+      #beat-3-stack {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        font-family: "ShipSans", Arial, sans-serif;
+      }
+
+      .scene-root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: linear-gradient(135deg, rgba(26, 29, 35, 0.96), rgba(19, 22, 28, 0.98));
+      }
+
+      .bg-shot-wrap,
+      .grid,
+      .world-glow,
+      .scene-content {
+        position: absolute;
+      }
+
+      .bg-shot-wrap {
+        inset: 0;
+        opacity: 0.16;
+        overflow: hidden;
+      }
+
+      .bg-shot {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: blur(14px) brightness(0.58);
+      }
+
+      .grid {
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        background-size: 108px 108px;
+        opacity: 0.24;
+      }
+
+      .world-glow {
+        right: 120px;
+        top: 240px;
+        width: 420px;
+        height: 420px;
+        border-radius: 999px;
+        background:
+          radial-gradient(circle at center, rgba(51, 204, 51, 0.16), transparent 42%),
+          radial-gradient(circle at 30% 30%, rgba(135, 206, 235, 0.2), transparent 38%);
+        filter: blur(70px);
+      }
+
+      .scene-content {
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 26px;
+        padding: 98px 108px;
+      }
+
+      .header-block {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        max-width: 1080px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        width: fit-content;
+        padding: 10px 16px;
+        border: 1px solid rgba(255, 153, 204, 0.25);
+        border-radius: 999px;
+        color: #ff99cc;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+      }
+
+      .headline {
+        margin: 0;
+        color: #ffffff;
+        font-size: 72px;
+        line-height: 1.02;
+        letter-spacing: -0.04em;
+      }
+
+      .track-row {
+        overflow: hidden;
+      }
+
+      .track {
+        display: flex;
+        gap: 16px;
+        width: fit-content;
+      }
+
+      .pill {
+        padding: 14px 20px;
+        border: 1px solid rgba(68, 68, 68, 0.9);
+        border-radius: 999px;
+        background: rgba(47, 52, 54, 0.62);
+        color: #e5e5e5;
+        font-size: 22px;
+        font-weight: 600;
+      }
+
+      .pill.accent {
+        border-color: rgba(51, 204, 51, 0.34);
+        color: #ffffff;
+      }
+
+      .main-row {
+        display: flex;
+        gap: 34px;
+        align-items: stretch;
+        flex: 1;
+      }
+
+      .terminal-wrap,
+      .launch-panel {
+        position: relative;
+        border: 1px solid rgba(68, 68, 68, 0.94);
+        border-radius: 32px;
+        background: rgba(47, 52, 54, 0.58);
+        box-shadow: 0 24px 58px rgba(0, 0, 0, 0.22);
+      }
+
+      .terminal-wrap {
+        display: flex;
+        width: 1060px;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .terminal-top {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 18px 22px;
+        border-bottom: 1px solid rgba(68, 68, 68, 0.84);
+        color: #a3a3a3;
+        font-family: "ShipMono", monospace;
+        font-size: 16px;
+      }
+
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 999px;
+      }
+
+      .dot.red {
+        background: #fd97cb;
+      }
+
+      .dot.amber {
+        background: #fe9a00;
+      }
+
+      .dot.green {
+        background: #33cc33;
+      }
+
+      .terminal-label {
+        margin-left: auto;
+      }
+
+      .terminal-body {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        gap: 20px;
+        padding: 32px 30px;
+        justify-content: center;
+      }
+
+      .term-line {
+        width: fit-content;
+        color: #ffffff;
+        font-family: "ShipMono", monospace;
+        font-size: 29px;
+        line-height: 1.35;
+        padding-right: 12px;
+        border-right: 2px solid rgba(255, 153, 204, 0.8);
+        clip-path: inset(0 100% 0 0);
+      }
+
+      .line-2 {
+        padding-inline: 12px;
+        border-radius: 12px;
+        color: #ffffff;
+        background: rgba(77, 16, 47, 0.98);
+      }
+
+      .line-3 {
+        color: #87ceeb;
+      }
+
+      .line-4 {
+        color: #33cc33;
+      }
+
+      .launch-panel {
+        width: 610px;
+        padding: 34px 30px;
+        overflow: hidden;
+      }
+
+      .launch-chip {
+        display: inline-flex;
+        padding: 10px 16px;
+        border: 1px solid rgba(51, 204, 51, 0.26);
+        border-radius: 999px;
+        color: #33cc33;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+      }
+
+      .launch-copy {
+        margin-top: 22px;
+        max-width: 420px;
+        color: #ffffff;
+        font-size: 40px;
+        line-height: 1.14;
+      }
+
+      .pulse,
+      .orbit {
+        position: absolute;
+        border-radius: 999px;
+      }
+
+      .pulse {
+        height: 4px;
+        background: linear-gradient(90deg, rgba(135, 206, 235, 0), rgba(135, 206, 235, 0.84), rgba(51, 204, 51, 0));
+        box-shadow: 0 0 18px rgba(135, 206, 235, 0.46);
+      }
+
+      .pulse-a {
+        left: 50px;
+        top: 220px;
+        width: 230px;
+      }
+
+      .pulse-b {
+        left: 180px;
+        top: 330px;
+        width: 260px;
+      }
+
+      .pulse-c {
+        left: 92px;
+        top: 432px;
+        width: 300px;
+      }
+
+      .orbit {
+        border: 1px solid rgba(135, 206, 235, 0.22);
+      }
+
+      .orbit-a {
+        right: 54px;
+        top: 86px;
+        width: 210px;
+        height: 210px;
+      }
+
+      .orbit-b {
+        right: 120px;
+        bottom: 64px;
+        width: 136px;
+        height: 136px;
+      }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo(".eyebrow", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.42, ease: "power3.out" }, 0.18);
+      tl.fromTo(".headline", { opacity: 0, y: 66 }, { opacity: 1, y: 0, duration: 0.74, ease: "expo.out" }, 0.28);
+      tl.fromTo(".track-row-a", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.46, ease: "power2.out" }, 0.72);
+      tl.fromTo(".track-row-b", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.46, ease: "power2.out" }, 0.86);
+      tl.fromTo(".terminal-wrap", { opacity: 0, x: -80, y: 36 }, { opacity: 1, x: 0, y: 0, duration: 0.74, ease: "power3.out" }, 1.04);
+      tl.fromTo(".launch-panel", { opacity: 0, x: 90, y: 34 }, { opacity: 1, x: 0, y: 0, duration: 0.72, ease: "expo.out" }, 1.16);
+      tl.fromTo(".term-line", { clipPath: "inset(0 100% 0 0)", opacity: 0.4 }, { clipPath: "inset(0 0% 0 0)", opacity: 1, duration: 0.76, stagger: 0.28, ease: "none" }, 1.42);
+      tl.fromTo(".pulse", { opacity: 0, scaleX: 0.2 }, { opacity: 1, scaleX: 1, duration: 0.56, stagger: 0.16, ease: "power2.out" }, 1.86);
+      tl.fromTo(".orbit", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.56, stagger: 0.16, ease: "power2.out" }, 1.94);
+
+      tl.to(".track-a", { x: -110, duration: 5.4, ease: "sine.inOut", yoyo: true, repeat: 1 }, 1.16);
+      tl.to(".track-b", { x: 130, duration: 5.6, ease: "sine.inOut", yoyo: true, repeat: 1 }, 1.06);
+      tl.to(".bg-shot", { scale: 1.05, duration: 6.3, ease: "none" }, 0);
+      tl.to(".world-glow", { x: -24, y: 20, duration: 2.8, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0.4);
+      tl.to(".pulse", { x: 46, duration: 1.1, ease: "sine.inOut", yoyo: true, repeat: 3, stagger: 0.12 }, 2.5);
+
+      window.__timelines["beat-3-stack"] = tl;
+    </script>
+  </div>
+</template>

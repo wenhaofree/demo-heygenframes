@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        margin: 0;
+        overflow: hidden;
+        background: #07100f;
+      }
+
+      [data-composition-id="main"] {
+        position: relative;
+        z-index: 1;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: transparent;
+        color: #f2f0e8;
+        font-family: "Space Grotesk", system-ui, sans-serif;
+      }
+
+      #background-video {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        background: #07100f;
+        filter: saturate(1.08) contrast(1.08) brightness(0.82);
+      }
+
+      .shade {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background:
+          radial-gradient(circle at 72% 42%, rgba(45, 242, 200, 0.18), transparent 30%),
+          radial-gradient(circle at 24% 68%, rgba(244, 208, 111, 0.13), transparent 34%),
+          rgba(7, 16, 15, 0.34);
+        pointer-events: none;
+      }
+
+      .grain {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        opacity: 0.13;
+        mix-blend-mode: screen;
+        pointer-events: none;
+        background-image:
+          repeating-radial-gradient(circle at 17% 31%, rgba(242, 240, 232, 0.16) 0 1px, transparent 1px 4px),
+          repeating-linear-gradient(115deg, rgba(242, 240, 232, 0.05) 0 1px, transparent 1px 9px);
+      }
+
+      .scene-content {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        width: 100%;
+        height: 100%;
+        padding: 118px 146px 120px;
+        gap: 30px;
+      }
+
+      .topline {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        min-height: 42px;
+        color: #a8b8b4;
+        font-size: 22px;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .signal {
+        width: 16px;
+        height: 16px;
+        border: 1px solid #2df2c8;
+        border-radius: 50%;
+        box-shadow: 0 0 28px rgba(45, 242, 200, 0.55);
+      }
+
+      .title {
+        max-width: 1280px;
+        margin: 0;
+        color: #f2f0e8;
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 174px;
+        font-weight: 800;
+        line-height: 0.88;
+        letter-spacing: 0.01em;
+        text-transform: uppercase;
+        text-wrap: balance;
+        text-shadow: 0 24px 70px rgba(0, 0, 0, 0.48);
+        will-change: transform, opacity;
+      }
+
+      .subtitle {
+        max-width: 720px;
+        margin: 0;
+        color: #d6dfdb;
+        font-size: 34px;
+        font-weight: 300;
+        line-height: 1.28;
+        letter-spacing: 0.01em;
+        will-change: transform, opacity;
+      }
+
+      .product-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 16px;
+        max-width: 960px;
+        margin-top: 24px;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        min-height: 52px;
+        padding: 0 22px;
+        border: 1px solid rgba(168, 184, 180, 0.34);
+        border-radius: 6px;
+        background: rgba(7, 16, 15, 0.38);
+        color: #f2f0e8;
+        font-size: 20px;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        backdrop-filter: blur(14px);
+        will-change: transform, opacity;
+      }
+
+      .pill.accent {
+        border-color: rgba(45, 242, 200, 0.62);
+        color: #2df2c8;
+      }
+
+      .launch-line {
+        width: min(42vw, 760px);
+        height: 2px;
+        margin-top: 18px;
+        transform-origin: left center;
+        background: linear-gradient(90deg, #2df2c8 0%, rgba(244, 208, 111, 0.85) 54%, transparent 100%);
+        box-shadow: 0 0 34px rgba(45, 242, 200, 0.34);
+        will-change: transform, opacity;
+      }
+
+      .corner-mark {
+        position: absolute;
+        right: 136px;
+        bottom: 110px;
+        z-index: 4;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        color: #a8b8b4;
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        font-variant-numeric: tabular-nums;
+        will-change: transform, opacity;
+      }
+
+      .corner-mark::before {
+        content: "";
+        width: 74px;
+        height: 1px;
+        background: rgba(244, 208, 111, 0.78);
+      }
+
+      .fade-plate {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        background: #07100f;
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="10"
+      data-width="1920"
+      data-height="1080"
+    >
+      <audio
+        id="background-music"
+        data-start="0"
+        data-duration="10"
+        data-track-index="2"
+        data-volume="0.62"
+        src="assets/music.mp3"
+      ></audio>
+
+      <div id="title-card" class="clip scene-content" data-start="0" data-duration="10" data-track-index="1">
+        <div class="topline">
+          <span class="signal"></span>
+          <span>Introducing the next workspace layer</span>
+        </div>
+        <h1 class="title">Lumen X1</h1>
+        <p class="subtitle">A focused product experience for teams that need clarity, speed, and a calmer control surface.</p>
+        <div class="product-row" aria-label="Product highlights">
+          <span class="pill accent">Live Preview</span>
+          <span class="pill">10x Faster Setup</span>
+          <span class="pill">Secure by Design</span>
+        </div>
+        <div class="launch-line"></div>
+      </div>
+
+      <div class="clip corner-mark" data-start="0" data-duration="10" data-track-index="3">Launch Film 00:10</div>
+      <div class="grain"></div>
+      <div class="shade"></div>
+      <div class="fade-plate"></div>
+    </div>
+
+    <video
+      id="background-video"
+      data-start="0"
+      data-duration="10"
+      data-track-index="0"
+      src="assets/background.mp4"
+      muted
+      playsinline
+    ></video>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+
+      const duration = 10;
+      const tl = gsap.timeline({ paused: true });
+
+      tl.from(".shade", { opacity: 0, scale: 1.04, duration: 1.1, ease: "power2.out" }, 0.18);
+      tl.from(".grain", { opacity: 0, duration: 0.7, ease: "power1.out" }, 0.26);
+      tl.from(".signal", { scale: 0.55, opacity: 0, duration: 0.52, ease: "back.out(1.8)" }, 0.34);
+      tl.from('[data-composition-id="main"] .topline span:last-child', { y: 18, opacity: 0, duration: 0.58, ease: "power3.out" }, 0.46);
+      tl.from(".title", { y: 34, opacity: 0, scale: 0.985, duration: 1.28, ease: "sine.out" }, 0.68);
+      tl.from(".subtitle", { y: 26, opacity: 0, duration: 0.72, ease: "power2.out" }, 1.42);
+      tl.from('[data-composition-id="main"] .pill', { y: 28, opacity: 0, scale: 0.96, duration: 0.56, stagger: 0.11, ease: "expo.out" }, 1.84);
+      tl.from(".launch-line", { scaleX: 0, opacity: 0, duration: 0.74, ease: "power4.out" }, 2.24);
+      tl.from(".corner-mark", { x: 34, opacity: 0, duration: 0.64, ease: "circ.out" }, 2.5);
+
+      tl.to(".signal", { boxShadow: "0 0 46px rgba(45, 242, 200, 0.72)", duration: 2.4, repeat: Math.floor((duration - 0.95) / 2.4) - 1, yoyo: true, ease: "sine.inOut" }, 0.95);
+      tl.to(".shade", { opacity: 0.82, scale: 1.025, duration: 3.6, repeat: Math.floor((duration - 1.45) / 3.6) - 1, yoyo: true, ease: "sine.inOut" }, 1.45);
+
+      tl.to(".scene-content", { y: -18, opacity: 0, duration: 0.7, ease: "power2.in" }, 9.0);
+      tl.to(".corner-mark", { opacity: 0, y: -12, duration: 0.46, ease: "power2.in" }, 9.1);
+      tl.to(".fade-plate", { opacity: 1, duration: 0.78, ease: "power1.inOut" }, 9.2);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

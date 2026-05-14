@@ -1,0 +1,9 @@
+Ship your production SaaS before Monday.
+
+ShipSaaS gives you auth, Stripe, multi-language support, and deployment ready out of the box, so you skip over two hundred hours of setup.
+
+Built on Next.js sixteen, React nineteen, Drizzle, Better Auth, and T R P C, it's ready for real products and global launch.
+
+More than one thousand developers already trust it. Lifetime access is just ninety nine dollars.
+
+Buy once. Build forever. Start shipping today.

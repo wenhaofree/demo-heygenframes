@@ -1,0 +1,308 @@
+<template id="beat-2-boilerplate-template">
+  <div
+    id="beat-2-boilerplate"
+    data-composition-id="beat-2-boilerplate"
+    data-start="0"
+    data-duration="9.3"
+    data-width="1920"
+    data-height="1080"
+  >
+    <div class="scene-root">
+      <div class="bg-image-wrap">
+        <img class="bg-image" src="../capture/assets/hero-stack.webp" alt="ShipSaaS stack art" />
+      </div>
+      <div class="mesh"></div>
+
+      <div class="scene-content">
+        <div class="counter-col">
+          <div class="eyebrow">SKIP SETUP</div>
+          <h2 class="headline">Everything tedious, already handled.</h2>
+          <p class="body">
+            Auth, payments, multi-language routing, and product launch flows come pre-integrated so you can go
+            straight to business logic.
+          </p>
+
+          <div class="counter-card">
+            <div class="counter-number"><span id="hours-counter">0</span><span class="suffix">+</span></div>
+            <div class="counter-label">Hours saved</div>
+            <div class="counter-sub">20+ pre-built modules ready on day one.</div>
+          </div>
+        </div>
+
+        <div class="grid-col">
+          <div class="feature-card card-a">
+            <img class="icon" src="../capture/assets/svgs/lucide-shield-check.svg" alt="Authentication icon" />
+            <h3>Robust Authentication</h3>
+            <p>Login, OAuth, sessions, and secure access flows already wired through Better Auth.</p>
+          </div>
+
+          <div class="feature-card card-b">
+            <img class="icon" src="../capture/assets/svgs/lucide-credit-card.svg" alt="Payments icon" />
+            <h3>Global Payments</h3>
+            <p>Stripe checkout, pricing tables, subscriptions, and webhook logic ready for revenue.</p>
+          </div>
+
+          <div class="feature-card card-c">
+            <img class="icon" src="../capture/assets/svgs/lucide-globe.svg" alt="Internationalization icon" />
+            <h3>Native i18n</h3>
+            <p>SEO-friendly multi-language routes with EN and ZH support included from start.</p>
+          </div>
+
+          <div class="feature-card card-d">
+            <img class="icon" src="../capture/assets/svgs/lucide-code.svg" alt="Deploy icon" />
+            <h3>One-Click Launch</h3>
+            <p>Optimized for Cloudflare and Vercel so your production deploy is a setup task, not a project.</p>
+          </div>
+
+          <div class="connector connector-h"></div>
+          <div class="connector connector-v"></div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      @font-face {
+        font-family: "ShipSans";
+        src: url("../capture/assets/fonts/pxiEyp8kv8JHgFVrFJA.ttf");
+        font-weight: 400;
+      }
+
+      @font-face {
+        font-family: "ShipSans";
+        src: url("../capture/assets/fonts/pxiByp8kv8JHgFVrLGT9V1s.ttf");
+        font-weight: 500;
+      }
+
+      @font-face {
+        font-family: "ShipSans";
+        src: url("../capture/assets/fonts/pxiByp8kv8JHgFVrLCz7V1s.ttf");
+        font-weight: 700;
+      }
+
+      #beat-2-boilerplate {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        font-family: "ShipSans", Arial, sans-serif;
+      }
+
+      .scene-root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 18% 58%, rgba(255, 153, 204, 0.1), transparent 28%),
+          radial-gradient(circle at 78% 18%, rgba(135, 206, 235, 0.14), transparent 25%),
+          rgba(26, 29, 35, 0.94);
+      }
+
+      .bg-image-wrap,
+      .mesh,
+      .scene-content {
+        position: absolute;
+      }
+
+      .bg-image-wrap {
+        inset: 0;
+        opacity: 0.16;
+        overflow: hidden;
+      }
+
+      .bg-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: blur(10px) saturate(1.1);
+      }
+
+      .mesh {
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(26, 29, 35, 0.2), rgba(26, 29, 35, 0.78)),
+          repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 120px),
+          repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0 1px, transparent 1px 120px);
+        opacity: 0.58;
+      }
+
+      .scene-content {
+        inset: 0;
+        display: flex;
+        gap: 54px;
+        align-items: center;
+        padding: 108px 110px;
+      }
+
+      .counter-col {
+        display: flex;
+        width: 470px;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        width: fit-content;
+        padding: 10px 16px;
+        border: 1px solid rgba(255, 153, 204, 0.26);
+        border-radius: 999px;
+        color: #ff99cc;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+      }
+
+      .headline {
+        margin: 0;
+        color: #ffffff;
+        font-size: 84px;
+        line-height: 0.96;
+        letter-spacing: -0.04em;
+      }
+
+      .body {
+        margin: 0;
+        color: #a3a3a3;
+        font-size: 24px;
+        line-height: 1.45;
+      }
+
+      .counter-card {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        padding: 28px 30px;
+        border: 1px solid rgba(68, 68, 68, 0.9);
+        border-radius: 30px;
+        background: rgba(47, 52, 54, 0.58);
+        box-shadow: 0 24px 54px rgba(0, 0, 0, 0.22);
+      }
+
+      .counter-number {
+        display: flex;
+        align-items: flex-start;
+        gap: 2px;
+        color: #ffffff;
+        font-size: 112px;
+        font-weight: 800;
+        line-height: 0.9;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .suffix {
+        color: #ff99cc;
+      }
+
+      .counter-label {
+        color: #ff99cc;
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .counter-sub {
+        color: #a3a3a3;
+        font-size: 18px;
+        line-height: 1.4;
+      }
+
+      .grid-col {
+        position: relative;
+        display: grid;
+        width: 1176px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .feature-card {
+        position: relative;
+        display: flex;
+        min-height: 320px;
+        flex-direction: column;
+        gap: 20px;
+        padding: 28px;
+        border: 1px solid rgba(68, 68, 68, 0.92);
+        border-radius: 34px;
+        background: rgba(47, 52, 54, 0.72);
+        box-shadow: 0 18px 48px rgba(0, 0, 0, 0.2);
+      }
+
+      .feature-card h3 {
+        margin: 0;
+        color: #ffffff;
+        font-size: 34px;
+        line-height: 1.04;
+      }
+
+      .feature-card p {
+        margin: 0;
+        color: #a3a3a3;
+        font-size: 20px;
+        line-height: 1.42;
+      }
+
+      .icon {
+        width: 56px;
+        height: 56px;
+        object-fit: contain;
+        filter: brightness(1.25);
+      }
+
+      .connector {
+        position: absolute;
+        background: linear-gradient(90deg, rgba(255, 153, 204, 0.4), rgba(135, 206, 235, 0.34));
+        opacity: 0.45;
+      }
+
+      .connector-h {
+        top: 330px;
+        left: 554px;
+        width: 74px;
+        height: 2px;
+      }
+
+      .connector-v {
+        top: 292px;
+        left: 588px;
+        width: 2px;
+        height: 82px;
+      }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+
+      const tl = gsap.timeline({ paused: true });
+      const counterState = { value: 0 };
+      const counterEl = document.getElementById("hours-counter");
+      const floatRepeats = 3;
+
+      tl.fromTo(".eyebrow", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 0.18);
+      tl.fromTo(".headline", { opacity: 0, y: 78 }, { opacity: 1, y: 0, duration: 0.8, ease: "expo.out" }, 0.28);
+      tl.fromTo(".body", { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.54, ease: "power2.out" }, 0.66);
+      tl.fromTo(".counter-card", { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.7, ease: "power3.out" }, 0.78);
+      tl.to(counterState, {
+        value: 200,
+        duration: 1.7,
+        ease: "power2.out",
+        onUpdate: () => {
+          counterEl.textContent = `${Math.round(counterState.value)}`;
+        },
+      }, 0.96);
+      tl.fromTo(".feature-card.card-a", { opacity: 0, x: 60, y: -40 }, { opacity: 1, x: 0, y: 0, duration: 0.62, ease: "power3.out" }, 0.82);
+      tl.fromTo(".feature-card.card-b", { opacity: 0, x: 80, y: -48 }, { opacity: 1, x: 0, y: 0, duration: 0.64, ease: "expo.out" }, 1.02);
+      tl.fromTo(".feature-card.card-c", { opacity: 0, x: 58, y: 42 }, { opacity: 1, x: 0, y: 0, duration: 0.64, ease: "back.out(1.08)" }, 1.22);
+      tl.fromTo(".feature-card.card-d", { opacity: 0, x: 72, y: 48 }, { opacity: 1, x: 0, y: 0, duration: 0.64, ease: "power2.out" }, 1.42);
+      tl.fromTo(".connector", { opacity: 0, scaleX: 0.2, scaleY: 0.2 }, { opacity: 0.45, scaleX: 1, scaleY: 1, duration: 0.46, ease: "power2.out" }, 1.5);
+
+      tl.to(".bg-image", { scale: 1.06, duration: 7.6, ease: "none" }, 0);
+      tl.to(".feature-card", { y: -8, duration: 1.4, ease: "sine.inOut", stagger: 0.08, yoyo: true, repeat: floatRepeats }, 2.2);
+      tl.to(".counter-card", { y: -10, duration: 1.5, ease: "sine.inOut", yoyo: true, repeat: 2 }, 2.4);
+
+      window.__timelines["beat-2-boilerplate"] = tl;
+    </script>
+  </div>
+</template>

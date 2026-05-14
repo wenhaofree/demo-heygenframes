@@ -1,0 +1,114 @@
+[
+  {
+    "url": "https://www.shipsaas.net/_next/image?url=%2Flogo.webp&w=3840&q=75",
+    "type": "Image",
+    "contexts": [
+      "img[src]",
+      "img[srcset]"
+    ],
+    "notes": "ShipSaaS logo",
+    "description": "ShipSaaS logo",
+    "sectionClasses": "sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-backgrou",
+    "aboveFold": true,
+    "nearestHeading": "产品"
+  },
+  {
+    "url": "https://www.shipsaas.net/_next/image?url=%2Favatars%2F16860528.webp&w=3840&q=75",
+    "type": "Image",
+    "contexts": [
+      "img[src]",
+      "img[srcset]"
+    ],
+    "notes": "Community member 1",
+    "description": "Community member 1",
+    "nearestHeading": "让你的 SaaS 产品几小时交付",
+    "sectionClasses": "relative overflow-hidden",
+    "aboveFold": true
+  },
+  {
+    "url": "https://www.shipsaas.net/_next/image?url=%2Favatars%2F20110627.webp&w=3840&q=75",
+    "type": "Image",
+    "contexts": [
+      "img[src]",
+      "img[srcset]"
+    ],
+    "notes": "Community member 2",
+    "description": "Community member 2",
+    "nearestHeading": "让你的 SaaS 产品几小时交付",
+    "sectionClasses": "relative overflow-hidden",
+    "aboveFold": true
+  },
+  {
+    "url": "https://www.shipsaas.net/_next/image?url=%2Favatars%2F106103625.webp&w=3840&q=75",
+    "type": "Image",
+    "contexts": [
+      "img[src]",
+      "img[srcset]"
+    ],
+    "notes": "Community member 3",
+    "description": "Community member 3",
+    "nearestHeading": "让你的 SaaS 产品几小时交付",
+    "sectionClasses": "relative overflow-hidden",
+    "aboveFold": true
+  },
+  {
+    "url": "https://www.shipsaas.net/_next/image?url=%2Favatars%2F59228569.webp&w=3840&q=75",
+    "type": "Image",
+    "contexts": [
+      "img[src]",
+      "img[srcset]"
+    ],
+    "notes": "Community member 4",
+    "description": "Community member 4",
+    "nearestHeading": "让你的 SaaS 产品几小时交付",
+    "sectionClasses": "relative overflow-hidden",
+    "aboveFold": true
+  },
+  {
+    "url": "https://www.shipsaas.net/_next/image?url=%2Fhero-stack.webp&w=3840&q=86",
+    "type": "Image",
+    "contexts": [
+      "img[src]",
+      "img[srcset]"
+    ],
+    "notes": "ShipSaaS product preview",
+    "description": "ShipSaaS product preview",
+    "nearestHeading": "让你的 SaaS 产品几小时交付",
+    "sectionClasses": "relative overflow-hidden",
+    "aboveFold": true
+  },
+  {
+    "url": "https://www.shipsaas.net/_next/static/chunks/webpack-2a4cac5861532d0b.js",
+    "type": "Other",
+    "contexts": [
+      "link[rel=\"preload\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "https://www.shipsaas.net/favicon.ico",
+    "type": "Icon",
+    "contexts": [
+      "link[rel=\"shortcut icon\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "https://www.shipsaas.net/logo.png",
+    "type": "Icon",
+    "contexts": [
+      "link[rel=\"icon\"]",
+      "link[rel=\"apple-touch-icon\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "https://shipsaas.net/og-image.png",
+    "type": "Image",
+    "contexts": [
+      "meta[og:image]",
+      "meta[twitter:image]"
+    ],
+    "notes": null
+  }
+]

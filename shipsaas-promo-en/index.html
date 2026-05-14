@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>ShipSaaS Promo Video</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        margin: 0;
+        overflow: hidden;
+        background: #1a1d23;
+      }
+
+      body {
+        font-family: "ShipSans", Arial, sans-serif;
+      }
+
+      #project-root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 18% 18%, rgba(255, 153, 204, 0.14), transparent 28%),
+          radial-gradient(circle at 82% 22%, rgba(135, 206, 235, 0.1), transparent 24%),
+          linear-gradient(145deg, #1a1d23 0%, #171a20 54%, #15181d 100%);
+        color: #e5e5e5;
+      }
+
+      .root-bg {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      .root-grid {
+        position: absolute;
+        inset: -160px;
+        opacity: 0.14;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        background-size: 120px 120px;
+      }
+
+      .root-halo {
+        position: absolute;
+        border-radius: 999px;
+        filter: blur(90px);
+        opacity: 0.5;
+      }
+
+      .root-halo.one {
+        top: -110px;
+        left: 90px;
+        width: 480px;
+        height: 480px;
+        background: rgba(255, 153, 204, 0.16);
+      }
+
+      .root-halo.two {
+        right: 120px;
+        top: 120px;
+        width: 340px;
+        height: 340px;
+        background: rgba(135, 206, 235, 0.14);
+      }
+
+      .root-halo.three {
+        left: 620px;
+        bottom: -150px;
+        width: 520px;
+        height: 520px;
+        background: rgba(51, 204, 51, 0.08);
+      }
+
+      .root-vignette {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(17, 19, 24, 0.04) 0%, rgba(17, 19, 24, 0.1) 100%),
+          radial-gradient(circle at center, transparent 52%, rgba(7, 9, 12, 0.28) 100%);
+      }
+
+      .beat-slot {
+        position: absolute;
+        inset: 0;
+      }
+
+      #slot-beat-1 {
+        z-index: 10;
+      }
+
+      #slot-beat-2 {
+        z-index: 20;
+      }
+
+      #slot-beat-3 {
+        z-index: 30;
+      }
+
+      #slot-beat-4 {
+        z-index: 40;
+      }
+
+      #slot-beat-5 {
+        z-index: 50;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="project-root"
+      data-composition-id="shipsaas-promo-en"
+      data-start="0"
+      data-duration="29.4"
+      data-width="1920"
+      data-height="1080"
+    >
+      <audio
+        id="narration"
+        src="narration.wav"
+        data-start="0"
+        data-duration="29.06"
+        data-track-index="0"
+        data-volume="1"
+      ></audio>
+
+      <div class="root-bg">
+        <div class="root-grid"></div>
+        <div class="root-halo one"></div>
+        <div class="root-halo two"></div>
+        <div class="root-halo three"></div>
+        <div class="root-vignette"></div>
+      </div>
+
+      <div
+        id="slot-beat-1"
+        class="beat-slot"
+        data-composition-id="beat-1-hook"
+        data-composition-src="compositions/beat-1-hook.html"
+        data-start="0"
+        data-duration="2.8"
+        data-width="1920"
+        data-height="1080"
+        data-track-index="1"
+      ></div>
+      <div
+        id="slot-beat-2"
+        class="beat-slot"
+        data-composition-id="beat-2-boilerplate"
+        data-composition-src="compositions/beat-2-boilerplate.html"
+        data-start="2.45"
+        data-duration="9.3"
+        data-width="1920"
+        data-height="1080"
+        data-track-index="2"
+      ></div>
+      <div
+        id="slot-beat-3"
+        class="beat-slot"
+        data-composition-id="beat-3-stack"
+        data-composition-src="compositions/beat-3-stack.html"
+        data-start="11.33"
+        data-duration="9.05"
+        data-width="1920"
+        data-height="1080"
+        data-track-index="3"
+      ></div>
+      <div
+        id="slot-beat-4"
+        class="beat-slot"
+        data-composition-id="beat-4-proof"
+        data-composition-src="compositions/beat-4-proof.html"
+        data-start="20.13"
+        data-duration="4.2"
+        data-width="1920"
+        data-height="1080"
+        data-track-index="4"
+      ></div>
+      <div
+        id="slot-beat-5"
+        class="beat-slot"
+        data-composition-id="beat-5-cta"
+        data-composition-src="compositions/beat-5-cta.html"
+        data-start="23.05"
+        data-duration="6.35"
+        data-width="1920"
+        data-height="1080"
+        data-track-index="5"
+      ></div>
+
+      <script>
+        window.__timelines = window.__timelines || {};
+
+        const rootTl = gsap.timeline({ paused: true });
+        rootTl.to(".root-grid", { opacity: 0.2, duration: 8, ease: "sine.inOut", yoyo: true, repeat: 2 }, 0);
+        rootTl.to(".root-halo.one", { x: 70, y: 24, duration: 10, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0);
+        rootTl.to(".root-halo.two", { x: -80, y: 28, duration: 8, ease: "sine.inOut", yoyo: true, repeat: 2 }, 0.4);
+        rootTl.to(".root-halo.three", { x: 42, y: -30, duration: 9, ease: "sine.inOut", yoyo: true, repeat: 2 }, 0.2);
+        rootTl.to(".root-vignette", { opacity: 0.88, duration: 7, ease: "sine.inOut", yoyo: true, repeat: 3 }, 0);
+
+        window.__timelines["shipsaas-promo-en"] = rootTl;
+      </script>
+    </div>
+  </body>
+</html>

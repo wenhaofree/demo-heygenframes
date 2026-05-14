@@ -1,0 +1,439 @@
+<template id="beat-1-hook-template">
+  <div id="beat-1-hook" data-composition-id="beat-1-hook" data-start="0" data-duration="2.8" data-width="1920" data-height="1080">
+    <div class="scene-root">
+      <div class="noise"></div>
+      <div class="glow glow-a"></div>
+      <div class="glow glow-b"></div>
+      <div class="ghost-wrap">
+        <img class="ghost-shot" src="../capture/screenshots/scroll-000.png" alt="ShipSaaS hero capture" />
+      </div>
+
+      <div class="scene-content">
+        <div class="content-col">
+          <div class="brand-row">
+            <div class="logo-chip">
+              <img class="logo" src="../capture/assets/logo.webp" alt="ShipSaaS logo" />
+              <span class="brand-name">ShipSaaS</span>
+            </div>
+            <div class="eyebrow">EARLY BIRD 50% OFF</div>
+          </div>
+
+          <div class="copy-block">
+            <p class="kicker">Launch fast. Sell faster.</p>
+            <h1 class="title">
+              <span class="hero-line hero-line-a">Ship Your</span>
+              <span class="hero-line hero-line-b">Production SaaS</span>
+              <span class="hero-line hero-line-c">Before Monday</span>
+            </h1>
+            <p class="subtitle">
+              Production-ready Next.js SaaS boilerplate with payments, auth, and deployment already wired.
+            </p>
+          </div>
+
+          <div class="pill-row">
+            <div class="pill">Auth Built-in</div>
+            <div class="pill">Stripe Ready</div>
+            <div class="pill">One-Click Deploy</div>
+          </div>
+
+          <div class="proof-row">
+            <div class="proof-chip">
+              <span class="proof-value">4.9</span>
+              <span class="proof-label">Developer rating</span>
+            </div>
+            <div class="proof-chip">
+              <span class="proof-value">1,000+</span>
+              <span class="proof-label">Trusted builders</span>
+            </div>
+            <div class="proof-chip accent">
+              <span class="proof-value">200+</span>
+              <span class="proof-label">Hours saved</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-col">
+          <div class="device-shadow"></div>
+          <div class="device-wrap">
+            <img class="device-image" src="../capture/assets/hero-stack.webp" alt="ShipSaaS tech orb" />
+          </div>
+          <div class="rating-chip">
+            <span class="stars">★★★★★</span>
+            <span>4.9</span>
+          </div>
+          <div class="hours-chip">
+            <span class="hours-num">200+</span>
+            <span class="hours-copy">Hours saved</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      @font-face {
+        font-family: "ShipSans";
+        src: url("../capture/assets/fonts/pxiEyp8kv8JHgFVrFJA.ttf");
+        font-weight: 400;
+      }
+
+      @font-face {
+        font-family: "ShipSans";
+        src: url("../capture/assets/fonts/pxiByp8kv8JHgFVrLEj6V1s.ttf");
+        font-weight: 600;
+      }
+
+      @font-face {
+        font-family: "ShipSans";
+        src: url("../capture/assets/fonts/pxiByp8kv8JHgFVrLCz7V1s.ttf");
+        font-weight: 700;
+      }
+
+      @font-face {
+        font-family: "ShipSans";
+        src: url("../capture/assets/fonts/pxiByp8kv8JHgFVrLDD4V1s.ttf");
+        font-weight: 800;
+      }
+
+      #beat-1-hook {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        font-family: "ShipSans", Arial, sans-serif;
+      }
+
+      .scene-root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 22% 22%, rgba(255, 153, 204, 0.16), transparent 34%),
+          radial-gradient(circle at 74% 16%, rgba(135, 206, 235, 0.18), transparent 24%),
+          linear-gradient(135deg, rgba(47, 52, 54, 0.42), rgba(26, 29, 35, 0.1));
+      }
+
+      .noise,
+      .glow,
+      .ghost-wrap,
+      .scene-content,
+      .hours-chip,
+      .rating-chip {
+        position: absolute;
+      }
+
+      .noise {
+        inset: 0;
+        opacity: 0.09;
+        background-image:
+          repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 8px),
+          repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 7px);
+      }
+
+      .glow {
+        border-radius: 999px;
+        filter: blur(90px);
+      }
+
+      .glow-a {
+        top: -80px;
+        left: 580px;
+        width: 420px;
+        height: 420px;
+        background: rgba(255, 153, 204, 0.14);
+      }
+
+      .glow-b {
+        right: 110px;
+        bottom: -70px;
+        width: 380px;
+        height: 380px;
+        background: rgba(135, 206, 235, 0.13);
+      }
+
+      .ghost-wrap {
+        top: 140px;
+        right: 110px;
+        width: 860px;
+        height: 540px;
+        padding: 18px;
+        border: 1px solid rgba(68, 68, 68, 0.7);
+        border-radius: 36px;
+        opacity: 0.18;
+        overflow: hidden;
+        background: rgba(47, 52, 54, 0.36);
+        box-shadow: 0 30px 90px rgba(0, 0, 0, 0.22);
+      }
+
+      .ghost-shot {
+        width: 100%;
+        height: 100%;
+        border-radius: 24px;
+        object-fit: cover;
+        object-position: left top;
+        filter: saturate(0.7) blur(2px) brightness(0.84);
+      }
+
+      .scene-content {
+        inset: 0;
+        display: flex;
+        gap: 42px;
+        align-items: center;
+        justify-content: space-between;
+        padding: 96px 120px;
+      }
+
+      .content-col {
+        position: relative;
+        z-index: 4;
+        display: flex;
+        width: 760px;
+        height: 100%;
+        flex-direction: column;
+        justify-content: center;
+        gap: 28px;
+      }
+
+      .brand-row {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+
+      .logo-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 16px;
+        border: 1px solid rgba(68, 68, 68, 0.8);
+        border-radius: 999px;
+        background: rgba(26, 29, 35, 0.58);
+      }
+
+      .logo {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+      }
+
+      .brand-name {
+        color: #e5e5e5;
+        font-size: 24px;
+        font-weight: 700;
+      }
+
+      .eyebrow {
+        padding: 10px 16px;
+        border: 1px solid rgba(255, 153, 204, 0.28);
+        border-radius: 999px;
+        background: rgba(255, 153, 204, 0.08);
+        color: #ff99cc;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+      }
+
+      .copy-block {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .kicker {
+        margin: 0;
+        color: #87ceeb;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .title {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin: 0;
+        color: #ffffff;
+        font-size: 112px;
+        font-weight: 800;
+        line-height: 0.93;
+        letter-spacing: -0.04em;
+      }
+
+      .hero-line-b,
+      .hero-line-c {
+        background: linear-gradient(90deg, #ffffff 0%, #ff99cc 52%, #87ceeb 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .subtitle {
+        max-width: 660px;
+        margin: 0;
+        color: #a3a3a3;
+        font-size: 30px;
+        line-height: 1.4;
+      }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      .pill {
+        padding: 12px 18px;
+        border: 1px solid rgba(68, 68, 68, 0.9);
+        border-radius: 999px;
+        background: rgba(47, 52, 54, 0.44);
+        color: #e5e5e5;
+        font-size: 17px;
+        font-weight: 600;
+      }
+
+      .proof-row {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .proof-chip {
+        display: flex;
+        min-width: 178px;
+        flex-direction: column;
+        gap: 6px;
+        padding: 18px 20px;
+        border: 1px solid rgba(68, 68, 68, 0.9);
+        border-radius: 24px;
+        background: rgba(26, 29, 35, 0.64);
+        box-shadow: 0 16px 30px rgba(0, 0, 0, 0.18);
+      }
+
+      .proof-chip.accent {
+        border-color: rgba(51, 204, 51, 0.25);
+      }
+
+      .proof-value {
+        color: #ffffff;
+        font-size: 34px;
+        font-weight: 700;
+        line-height: 1;
+      }
+
+      .proof-label {
+        color: #a3a3a3;
+        font-size: 16px;
+        line-height: 1.3;
+      }
+
+      .visual-col {
+        position: relative;
+        z-index: 4;
+        width: 820px;
+        height: 700px;
+      }
+
+      .device-shadow {
+        position: absolute;
+        inset: 72px 30px 54px 88px;
+        border-radius: 42px;
+        background: rgba(0, 0, 0, 0.22);
+        filter: blur(32px);
+      }
+
+      .device-wrap {
+        position: absolute;
+        right: 0;
+        top: 72px;
+        width: 760px;
+        height: 470px;
+        padding: 18px;
+        border: 1px solid rgba(68, 68, 68, 0.84);
+        border-radius: 36px;
+        background: rgba(16, 18, 23, 0.72);
+        box-shadow: 0 30px 100px rgba(0, 0, 0, 0.28);
+      }
+
+      .device-image {
+        width: 100%;
+        height: 100%;
+        border-radius: 24px;
+        object-fit: cover;
+      }
+
+      .rating-chip,
+      .hours-chip {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 4px;
+        padding: 18px 20px;
+        border: 1px solid rgba(68, 68, 68, 0.88);
+        border-radius: 24px;
+        background: rgba(26, 29, 35, 0.9);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+      }
+
+      .rating-chip {
+        top: 126px;
+        right: 8px;
+        align-items: flex-start;
+      }
+
+      .hours-chip {
+        left: 12px;
+        bottom: 116px;
+        align-items: flex-start;
+      }
+
+      .stars {
+        color: #fe9a00;
+        font-size: 20px;
+        letter-spacing: 0.1em;
+      }
+
+      .hours-num {
+        color: #ffffff;
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 1;
+      }
+
+      .hours-copy {
+        color: #a3a3a3;
+        font-size: 16px;
+      }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+
+      const tl = gsap.timeline({ paused: true });
+      const ambientRepeats = 1;
+
+      tl.fromTo(".logo-chip", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.48, ease: "power3.out" }, 0.18);
+      tl.fromTo(".eyebrow", { opacity: 0, x: 34 }, { opacity: 1, x: 0, duration: 0.42, ease: "expo.out" }, 0.26);
+      tl.fromTo(".kicker", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.42, ease: "power2.out" }, 0.3);
+      tl.fromTo(".hero-line-a", { opacity: 0, y: 88 }, { opacity: 1, y: 0, duration: 0.72, ease: "expo.out" }, 0.34);
+      tl.fromTo(".hero-line-b", { opacity: 0, y: 78 }, { opacity: 1, y: 0, duration: 0.78, ease: "power4.out" }, 0.48);
+      tl.fromTo(".hero-line-c", { opacity: 0, y: 68 }, { opacity: 1, y: 0, duration: 0.72, ease: "back.out(1.2)" }, 0.62);
+      tl.fromTo(".subtitle", { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.56, ease: "power2.out" }, 0.92);
+      tl.fromTo(".pill", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.08, ease: "power2.out" }, 1.04);
+      tl.fromTo(".proof-chip", { opacity: 0, y: 24, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.52, stagger: 0.09, ease: "power3.out" }, 1.22);
+      tl.fromTo(".ghost-wrap", { opacity: 0, x: 90 }, { opacity: 0.18, x: 0, duration: 0.86, ease: "power3.out" }, 0.32);
+      tl.fromTo(".device-wrap", { opacity: 0, x: 140, rotation: 3 }, { opacity: 1, x: 0, rotation: 0, duration: 0.88, ease: "expo.out" }, 0.44);
+      tl.fromTo(".rating-chip", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.94);
+      tl.fromTo(".hours-chip", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.54, ease: "back.out(1.15)" }, 1.08);
+
+      tl.to(".device-image", { scale: 1.04, duration: 2.7, ease: "none" }, 0.58);
+      tl.to(".ghost-shot", { scale: 1.02, duration: 2.8, ease: "none" }, 0.4);
+      tl.to(".proof-chip", { y: -6, duration: 0.86, ease: "sine.inOut", yoyo: true, repeat: ambientRepeats, stagger: 0.05 }, 2.02);
+      tl.to(".glow-a", { x: 28, y: -18, duration: 2.2, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0);
+      tl.to(".glow-b", { x: -24, y: 14, duration: 2.5, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0.1);
+
+      window.__timelines["beat-1-hook"] = tl;
+    </script>
+  </div>
+</template>

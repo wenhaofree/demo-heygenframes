@@ -1,0 +1,337 @@
+[
+  {
+    "text": "Ship",
+    "start": 0.03,
+    "end": 0.21
+  },
+  {
+    "text": "your",
+    "start": 0.29,
+    "end": 0.52
+  },
+  {
+    "text": "production",
+    "start": 0.52,
+    "end": 1.17
+  },
+  {
+    "text": "sauce",
+    "start": 1.17,
+    "end": 1.45
+  },
+  {
+    "text": "before",
+    "start": 1.54,
+    "end": 1.88
+  },
+  {
+    "text": "Monday.",
+    "start": 1.88,
+    "end": 2.42
+  },
+  {
+    "text": "Ship",
+    "start": 2.45,
+    "end": 2.72
+  },
+  {
+    "text": "sauce",
+    "start": 2.72,
+    "end": 3.09
+  },
+  {
+    "text": "gives",
+    "start": 3.09,
+    "end": 3.4
+  },
+  {
+    "text": "you",
+    "start": 3.49,
+    "end": 3.66
+  },
+  {
+    "text": "off.",
+    "start": 3.78,
+    "end": 3.98
+  },
+  {
+    "text": "Stripe,",
+    "start": 4.01,
+    "end": 4.62
+  },
+  {
+    "text": "multi-language",
+    "start": 4.62,
+    "end": 5.76
+  },
+  {
+    "text": "support,",
+    "start": 5.76,
+    "end": 6.36
+  },
+  {
+    "text": "and",
+    "start": 6.39,
+    "end": 6.57
+  },
+  {
+    "text": "deployment",
+    "start": 6.65,
+    "end": 7.33
+  },
+  {
+    "text": "ready",
+    "start": 7.33,
+    "end": 7.6
+  },
+  {
+    "text": "out",
+    "start": 7.72,
+    "end": 7.92
+  },
+  {
+    "text": "of",
+    "start": 7.92,
+    "end": 8.07
+  },
+  {
+    "text": "the",
+    "start": 8.07,
+    "end": 8.29
+  },
+  {
+    "text": "box.",
+    "start": 8.29,
+    "end": 8.54
+  },
+  {
+    "text": "So",
+    "start": 8.57,
+    "end": 8.68
+  },
+  {
+    "text": "you",
+    "start": 8.68,
+    "end": 8.9
+  },
+  {
+    "text": "skip",
+    "start": 8.9,
+    "end": 9.19
+  },
+  {
+    "text": "over",
+    "start": 9.19,
+    "end": 9.48
+  },
+  {
+    "text": "200",
+    "start": 9.48,
+    "end": 10.15
+  },
+  {
+    "text": "hours",
+    "start": 10.15,
+    "end": 10.52
+  },
+  {
+    "text": "of",
+    "start": 10.52,
+    "end": 10.66
+  },
+  {
+    "text": "setup.",
+    "start": 10.66,
+    "end": 11.3
+  },
+  {
+    "text": "Built",
+    "start": 11.33,
+    "end": 11.7
+  },
+  {
+    "text": "on",
+    "start": 11.79,
+    "end": 11.87
+  },
+  {
+    "text": "Next.js",
+    "start": 11.87,
+    "end": 12.54
+  },
+  {
+    "text": "16,",
+    "start": 12.66,
+    "end": 13.29
+  },
+  {
+    "text": "React",
+    "start": 13.29,
+    "end": 13.8
+  },
+  {
+    "text": "19,",
+    "start": 13.8,
+    "end": 14.62
+  },
+  {
+    "text": "Drizzle,",
+    "start": 14.62,
+    "end": 15.26
+  },
+  {
+    "text": "Better",
+    "start": 15.32,
+    "end": 15.73
+  },
+  {
+    "text": "Off,",
+    "start": 16.01,
+    "end": 16.1
+  },
+  {
+    "text": "and",
+    "start": 16.13,
+    "end": 16.5
+  },
+  {
+    "text": "TRPC,",
+    "start": 16.59,
+    "end": 17.34
+  },
+  {
+    "text": "it's",
+    "start": 17.46,
+    "end": 17.68
+  },
+  {
+    "text": "ready",
+    "start": 17.68,
+    "end": 17.98
+  },
+  {
+    "text": "for",
+    "start": 17.98,
+    "end": 18.16
+  },
+  {
+    "text": "real",
+    "start": 18.16,
+    "end": 18.25
+  },
+  {
+    "text": "products",
+    "start": 18.53,
+    "end": 18.9
+  },
+  {
+    "text": "and",
+    "start": 18.9,
+    "end": 19.01
+  },
+  {
+    "text": "global",
+    "start": 19.15,
+    "end": 19.5
+  },
+  {
+    "text": "launch.",
+    "start": 19.5,
+    "end": 20.1
+  },
+  {
+    "text": "More",
+    "start": 20.13,
+    "end": 20.31
+  },
+  {
+    "text": "than",
+    "start": 20.39,
+    "end": 20.5
+  },
+  {
+    "text": "1,000",
+    "start": 20.59,
+    "end": 21.34
+  },
+  {
+    "text": "developers",
+    "start": 21.46,
+    "end": 21.96
+  },
+  {
+    "text": "already",
+    "start": 21.96,
+    "end": 22.22
+  },
+  {
+    "text": "trust",
+    "start": 22.52,
+    "end": 22.66
+  },
+  {
+    "text": "it.",
+    "start": 22.66,
+    "end": 23.01
+  },
+  {
+    "text": "Lifetime",
+    "start": 23.05,
+    "end": 23.76
+  },
+  {
+    "text": "access",
+    "start": 23.82,
+    "end": 24.26
+  },
+  {
+    "text": "is",
+    "start": 24.38,
+    "end": 24.47
+  },
+  {
+    "text": "just",
+    "start": 24.56,
+    "end": 24.92
+  },
+  {
+    "text": "$99.",
+    "start": 24.92,
+    "end": 25.9
+  },
+  {
+    "text": "Buy",
+    "start": 25.93,
+    "end": 26.11
+  },
+  {
+    "text": "once,",
+    "start": 26.19,
+    "end": 26.64
+  },
+  {
+    "text": "build",
+    "start": 26.64,
+    "end": 27.05
+  },
+  {
+    "text": "forever,",
+    "start": 27.05,
+    "end": 27.82
+  },
+  {
+    "text": "start",
+    "start": 27.82,
+    "end": 28.03
+  },
+  {
+    "text": "shipping",
+    "start": 28.33,
+    "end": 28.7
+  },
+  {
+    "text": "today.",
+    "start": 28.7,
+    "end": 29.26
+  }
+]

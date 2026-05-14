@@ -1,0 +1,166 @@
+[span] Toggle Menu
+[span] ShipSaaS
+[span] Switch language
+[a] 登录控制台
+[a] 立即开始
+[span] 限时早鸟 — 立省 50%
+[span] 告别重复造轮子，认证/支付/数据库一站式搞定。
+[h1] 让你的
+[span] SaaS 产品
+[span] 不再拖延数月
+[p] 生产级 Next.js 全栈代码库，认证、Stripe 支付、国际化、部署全部就绪。跳过 200+ 小时的基础搭建，今天就开始构建你的核心业务。
+[span] 认证开箱即用
+[span] Stripe 即刻收款
+[span] 一键全球部署
+[button] 立即获取源码
+[a] 在线演示
+[span] 4.9
+[p] 已有 1,000+ 开发者信赖使用
+[span] Next.js 16
+[span] React 19
+[span] TypeScript
+[span] Stripe
+[span] Tailwind v4
+[span] Drizzle ORM
+[span] Better Auth
+[span] tRPC
+[p] 200+
+[p] 小时已节省
+[span] 4.9
+[span] 极致开发体验
+[h2] 不再为繁琐的配置浪费时间
+[p] 我们为您处理了所有令人头疼的基础组件。从复杂的 Stripe 订阅逻辑到 SEO 优化的博客系统，一切都已经过完美集成。
+[span] 我们的优势
+[h3] 专为盈利和规模化而设计
+[p] ShipSaaS 不仅仅是一套 UI 模板。它是一个完整的生产环境解决方案，旨在帮助您在极短时间内从 0 到 1 建立可盈利的 SaaS。
+[p] 全栈技术巅峰
+[p] Next.js 16, Tailwind v4, Drizzle ORM, Stripe, Better Auth。始终保持技术栈最新。
+[p] 节省 200+ 开发工时
+[p] 预置了认证、支付、邮件、SEO、i18n 等 20+ 核心模块，直接进入业务开发阶段。
+[p] 边缘计算带来的极致速度
+[p] 针对 Cloudflare Workers 和 Vercel Edge 深度优化，为全球用户提供毫秒级响应。
+[p] 生产级特性
+[h2] 不仅仅是代码，更是经过验证的 SaaS 架构
+[p] 集成现代全栈开发所需的最佳实践，从第一行代码开始就是企业级标准。
+[h3] 企业级身份认证
+[p] 不再为 Auth 头疼。预设完整的注册、登录、OAuth（Google、GitHub）、魔法链接及会话管理，安全可靠。
+[h3] 全球化订阅支付
+[p] 深度集成 Stripe，已配置好定价表、结账页面和 Webhook 回调，轻松处理订阅、一次性支付和退款。
+[h3] 全链路类型安全
+[p] PostgreSQL + Drizzle ORM 黄金组合，提供端到端的类型提示，让数据库操作像写 TypeScript 一样丝滑。
+[h3] 高转化率 UI 组件
+[p] 基于 shadcn/ui 和 Tailwind CSS 精心设计的落地页与仪表盘，美观、响应式且支持深色模式，开箱即用。
+[h3] 原生国际化支持
+[p] 基于 next-intl 构建，SEO 友好。已内置中英文翻译文件，助您轻松通过多语言拓展全球市场。
+[h3] 高效的数据交互
+[p] 利用 tRPC 和 React Query 实现前后端类型共享，彻底告别 API 联调的痛苦，大幅提升开发效率。
+[h2] 现代技术栈
+[p] 卓越性能，源自底层动力
+[p] 我们只选择最稳定、最前沿的技术，确保您的应用具备极高的扩展性和维护性。
+[span] Next.js
+[span] Next.js 16
+[span] React
+[span] React 19
+[span] Tailwind CSS
+[span] Tailwind CSS v4
+[span] next-intl
+[span] next-intl
+[span] Drizzle ORM
+[span] PostgreSQL
+[span] postgres.js
+[span] Drizzle ORM
+[span] Better Auth
+[span] Better Auth
+[span] Stripe
+[span] Stripe
+[span] shadcn/ui
+[span] Shadcn UI
+[span] Tailark
+[span] Magic UI
+[span] Resend
+[span] Resend
+[span] Fumadocs
+[span] Fumadocs
+[span] 简单三步
+[h2] 开启您的 SaaS 盈利之旅
+[p] 我们优化了每一个环节，让您可以将全部精力投入到最核心的商业创意中。
+[h3] 1. 获取并初始化
+[p] 一键克隆 GitHub 私有仓库，通过简单的 `.env` 配置即可运行完整系统。
+[h3] 2. 注入核心创意
+[p] 在现有的成熟框架内，快速开发您的专属功能，无需担心用户登录或支付逻辑。
+[h3] 3. 全球同步部署
+[p] 关联 Vercel 或 Cloudflare，让您的 SaaS 几分钟内触达全球数百万潜在用户。
+[span] terminal - shipsaas
+[span] git clone
+[span] git@github.com:shipsaasnet/shipsaas my-project
+[div] Resolving deltas: 100% (1978/1978), done.
+[span] pnpm install && pnpm dev
+[div] ✓ Done in 500ms
+[div] Next.js 16.2.5 (Turbopack)
+[div] Local:
+[span] http://localhost:3000
+[span] 真实口碑
+[h2] 听听成功创业者的评价
+[p] 加入全球 1,000+ 正在使用 ShipSaaS 构建未来的开发者行列。
+[blockquote] ShipSaaS 帮我省掉了至少一个月的繁琐搭建工作。特别是 Stripe 的订阅逻辑，处理得非常细致，我可以直接专注在 AI 业务上。
+[cite] Chen Wei
+[span] SaaS Founder
+[blockquote] 代码质量令人惊叹。基于 Drizzle 和 tRPC 的架构非常清晰，不管是扩展功能还是二次开发都异常顺滑。
+[cite] Sarah J.
+[span] Fullstack Developer
+[blockquote] 如果你想快速上线一个商业化产品，这是目前市场上性价比最高的选择。文档非常详尽，两小时内我就完成了首个版本的部署。
+[cite] Kevin Zhang
+[span] 独立开发者
+[span] 透明定价
+[h2] 一次性买断，终身无限授权
+[p] 没有月费陷阱，没有隐藏开销。我们提供的是让您能长期盈利的基础设施。
+[div] 早鸟特惠 - 剩余名额有限
+[h3] ShipSaaS 终身全能版
+[span] Was
+[span] $199
+[button] 获取终身买断授权
+[p] 无需先登录。先支付，支付成功后会把魔法登录链接发到你的结账邮箱。
+[p] Manual Setup
+[p] 200+ Hours
+[p] With ShipSaaS
+[p] 2 Hours
+[p] 价格包含所有未来 v1.x 版本更新。一次购买，终身无限项目授权。
+[div] +490
+[p] Join 500+ developers shipping faster
+[h4] Core Capabilities
+[p] One license, unlimited ship power.
+[span] 100% 完整源码及私有仓库访问
+[span] 无限个商业项目部署授权
+[span] 预置完整的认证、支付、DB 逻辑
+[span] SEO 优化的博客及文档系统
+[span] 12 个月内 GitHub 仓库实时同步更新
+[span] 专属 Discord 技术交流社区
+[p] Fast-track your launch
+[p] Complete source code access. 12 months of prioritized updates. Priority community support.
+[span] 解疑释惑
+[h2] 您关心的所有问题
+[p] 透明沟通是我们建立信任的基础。
+[a] 查看开发者指南
+[span] 我能获得 100% 的源代码吗？
+[div] 绝对是的。购买后，您将通过 GitHub 获得完整仓库的读写权限，所有代码都在您的控制之下。
+[span] 买断授权的具体限制是什么？
+[div] 我们的终身授权允许您用于无限个商业项目。唯一的限制是您不能将该模板作为同类竞争产品（如另一个模板）进行二次销售。
+[span] 后续更新如何获取？
+[div] 我们承诺 12 个月内提供实时的 GitHub 仓库更新。即使授权到期，您已经获取的代码仍可终身使用。
+[span] 技术栈是否容易上手？
+[div] 只要您熟悉 React 和 Next.js，上手会非常快。我们提供了详细的文档，并对每一行关键代码进行了详细注释。
+[p] 还有其他疑问？欢迎联系我们的技术团队：
+[span] support@shipsaas.net
+[span] 把握先机
+[span] 加入 1,000+ 成功的开发者行列
+[h2] 别让想法停留在草稿纸上
+[p] 基础工作已经为您做好了。今天就开始，这个周末就上线您的 SaaS 梦想。
+[div] +1k
+[p] 已有 1,000+ 开发者选择 ShipSaaS
+[button] 立即下单获取
+[a] 先看看文档
+[p] 一次付费，终身使用，包含 12 个月实时更新
+[span] ShipSaaS
+[p] 生产级 Next.js SaaS 启动模板，助您在几天内实现产品上线并获利。
+[p] © 2026 ShipSaaS.net. 保留所有权利。
+[a] Powered by ShipSaaS

@@ -5,3 +5,11 @@
 /.hyperframes
 /.thumbnails
 /.waveform-cache
+
+# 本地生成文件：
+.hyperframes
+.thumbnails
+.timing
+.waveform-cache
+node_modules
+*.mp4

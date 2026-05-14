@@ -1,0 +1,280 @@
+<template id="beat-4-proof-template">
+  <div id="beat-4-proof" data-composition-id="beat-4-proof" data-start="0" data-duration="6.86" data-width="1920" data-height="1080">
+    <div class="scene-root">
+      <div class="back-count">1,000+</div>
+      <div class="glow glow-a"></div>
+      <div class="glow glow-b"></div>
+
+      <div class="scene-content">
+        <div class="headline-block">
+          <div class="eyebrow">真实口碑</div>
+          <h2 class="headline">听听成功创业者的评价。</h2>
+        </div>
+
+        <div class="cards-row">
+          <div class="quote-card card-a">
+            <div class="stars">★★★★★</div>
+            <p class="quote">“ShipSaaS 帮我省掉了至少一个月的繁琐搭建，我可以直接专注在 AI 业务上。”</p>
+            <div class="person">
+              <img class="avatar" src="../capture/assets/avatars/chen-wei.webp" alt="Chen Wei avatar" />
+              <div class="person-copy">
+                <span class="name">Chen Wei</span>
+                <span class="role">SaaS 创业者</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="quote-card card-b">
+            <div class="stars">★★★★★</div>
+            <p class="quote">“代码质量令人惊叹。基于 Drizzle 和 tRPC 的架构非常清晰，扩展功能也很顺滑。”</p>
+            <div class="person">
+              <img class="avatar" src="../capture/assets/avatars/sarah-j.webp" alt="Sarah J avatar" />
+              <div class="person-copy">
+                <span class="name">Sarah J.</span>
+                <span class="role">全栈开发者</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="quote-card card-c">
+            <div class="stars">★★★★★</div>
+            <p class="quote">“如果你想快速上线商业化产品，这是性价比极高的选择。两小时内我就跑通了首版。”</p>
+            <div class="person">
+              <img class="avatar" src="../capture/assets/avatars/kevin-zhang.webp" alt="Kevin Zhang avatar" />
+              <div class="person-copy">
+                <span class="name">Kevin Zhang</span>
+                <span class="role">独立开发者</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="banner">
+          <span class="banner-label">开发者在用</span>
+          <span class="banner-copy">更少折腾，更快上线。</span>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      @font-face {
+        font-family: "ShipSans";
+        src: url("../capture/assets/fonts/pxiEyp8kv8JHgFVrFJA.ttf");
+        font-weight: 400;
+      }
+
+      @font-face {
+        font-family: "ShipSans";
+        src: url("../capture/assets/fonts/pxiByp8kv8JHgFVrLCz7V1s.ttf");
+        font-weight: 700;
+      }
+
+      #beat-4-proof {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        font-family: poppins, "noto sans jp", sans-serif;
+      }
+
+      .scene-root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 18% 20%, rgba(255, 153, 204, 0.1), transparent 30%),
+          radial-gradient(circle at 82% 76%, rgba(135, 206, 235, 0.08), transparent 28%),
+          rgba(26, 29, 35, 0.96);
+      }
+
+      .back-count,
+      .glow,
+      .scene-content {
+        position: absolute;
+      }
+
+      .back-count {
+        top: 210px;
+        left: 100px;
+        color: rgba(255, 255, 255, 0.38);
+        font-size: 240px;
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.06em;
+      }
+
+      .glow {
+        border-radius: 999px;
+        filter: blur(80px);
+      }
+
+      .glow-a {
+        left: 320px;
+        top: 240px;
+        width: 260px;
+        height: 260px;
+        background: rgba(255, 153, 204, 0.12);
+      }
+
+      .glow-b {
+        right: 240px;
+        bottom: 160px;
+        width: 300px;
+        height: 300px;
+        background: rgba(135, 206, 235, 0.1);
+      }
+
+      .scene-content {
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 96px 110px;
+      }
+
+      .headline-block {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        max-width: 980px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        width: fit-content;
+        padding: 10px 16px;
+        border: 1px solid rgba(255, 153, 204, 0.26);
+        border-radius: 999px;
+        color: #ff99cc;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+      }
+
+      .headline {
+        margin: 0;
+        color: #ffffff;
+        font-size: 82px;
+        line-height: 0.98;
+        letter-spacing: -0.04em;
+      }
+
+      .cards-row {
+        display: flex;
+        gap: 22px;
+        margin-top: 16px;
+      }
+
+      .quote-card {
+        display: flex;
+        width: 552px;
+        min-height: 420px;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 30px;
+        border: 1px solid rgba(68, 68, 68, 0.9);
+        border-radius: 32px;
+        background: rgba(32, 36, 42, 0.92);
+        box-shadow: 0 24px 52px rgba(0, 0, 0, 0.22);
+      }
+
+      .stars {
+        color: #fe9a00;
+        font-size: 22px;
+        letter-spacing: 0.12em;
+      }
+
+      .quote {
+        margin: 0;
+        color: #ffffff;
+        font-size: 31px;
+        line-height: 1.34;
+      }
+
+      .person {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .avatar {
+        width: 70px;
+        height: 70px;
+        border-radius: 999px;
+        object-fit: cover;
+      }
+
+      .person-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 10px 14px;
+        border-radius: 18px;
+        background: rgba(12, 14, 18, 0.96);
+      }
+
+      .name {
+        color: #ffffff;
+        font-size: 22px;
+        font-weight: 700;
+      }
+
+      .role {
+        color: #f7f7f7;
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .banner {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        width: fit-content;
+        margin-top: auto;
+        padding: 18px 24px;
+        border: 1px solid rgba(51, 204, 51, 0.3);
+        border-radius: 999px;
+        background: rgba(26, 29, 35, 0.66);
+        box-shadow: 0 18px 46px rgba(0, 0, 0, 0.2);
+      }
+
+      .banner-label {
+        color: #33cc33;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+      }
+
+      .banner-copy {
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: 600;
+      }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo(".eyebrow", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.42, ease: "power3.out" }, 0.2);
+      tl.fromTo(".headline", { opacity: 0, y: 56 }, { opacity: 1, y: 0, duration: 0.68, ease: "expo.out" }, 0.3);
+      tl.fromTo(".back-count", { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1, duration: 0.9, ease: "power2.out" }, 0.2);
+      tl.fromTo(".card-a", { opacity: 0, y: 70, rotation: -4, scale: 0.92 }, { opacity: 1, y: 0, rotation: 0, scale: 1, duration: 0.7, ease: "power3.out" }, 0.84);
+      tl.fromTo(".card-b", { opacity: 0, y: 86, rotation: 2.5, scale: 0.9 }, { opacity: 1, y: 0, rotation: 0, scale: 1, duration: 0.76, ease: "expo.out" }, 1.04);
+      tl.fromTo(".card-c", { opacity: 0, y: 96, rotation: 4.2, scale: 0.9 }, { opacity: 1, y: 0, rotation: 0, scale: 1, duration: 0.78, ease: "back.out(1.08)" }, 1.24);
+      tl.fromTo(".banner", { opacity: 0, y: 24, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.48, ease: "power2.out" }, 2.08);
+
+      tl.to(".card-a", { y: -8, duration: 1.2, ease: "sine.inOut", yoyo: true, repeat: 2 }, 1.8);
+      tl.to(".card-b", { y: -10, duration: 1.25, ease: "sine.inOut", yoyo: true, repeat: 2 }, 1.92);
+      tl.to(".card-c", { y: -9, duration: 1.18, ease: "sine.inOut", yoyo: true, repeat: 2 }, 2.02);
+      tl.to(".glow-a", { x: 20, y: -18, duration: 2, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0);
+      tl.to(".glow-b", { x: -18, y: 16, duration: 2.2, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0.2);
+
+      window.__timelines["beat-4-proof"] = tl;
+    </script>
+  </div>
+</template>

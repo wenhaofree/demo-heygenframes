@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <title>AI 模型、工具、厂商关系科普动画</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        --canvas: #08111f;
+        --surface: #0f1d32;
+        --surface-2: #112b46;
+        --border: #28507e;
+        --text: #f4f7fb;
+        --muted: #b8c7da;
+        --blue: #49b6ff;
+        --aqua: #37e8ff;
+        --violet: #8878ff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        margin: 0;
+        overflow: hidden;
+        background: var(--canvas);
+      }
+
+      body {
+        font-family: "Bricolage Grotesque", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+        color: var(--text);
+      }
+
+      .mono {
+        font-family: "IBM Plex Mono", "SFMono-Regular", "Menlo", monospace;
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 18% 16%, rgba(73, 182, 255, 0.18), rgba(73, 182, 255, 0) 28%),
+          radial-gradient(circle at 82% 18%, rgba(136, 120, 255, 0.16), rgba(136, 120, 255, 0) 24%),
+          radial-gradient(circle at 48% 88%, rgba(55, 232, 255, 0.08), rgba(55, 232, 255, 0) 24%),
+          linear-gradient(145deg, #08111f 0%, #0a1424 52%, #07101a 100%);
+      }
+
+      .global-bg,
+      .global-vignette,
+      .scene,
+      .scene-shell,
+      .scene-grid,
+      .scanner-line,
+      .closing-network,
+      .chapter-hud {
+        position: absolute;
+      }
+
+      .global-bg {
+        inset: 0;
+        overflow: hidden;
+      }
+
+      .grid-field {
+        position: absolute;
+        inset: -180px;
+        opacity: 0.18;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.04) 1px, rgba(255, 255, 255, 0) 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, rgba(255, 255, 255, 0) 1px);
+        background-size: 94px 94px;
+      }
+
+      .global-orbit,
+      .global-halo {
+        position: absolute;
+        border-radius: 999px;
+      }
+
+      .global-halo {
+        filter: blur(86px);
+      }
+
+      .halo-a {
+        left: 90px;
+        top: -90px;
+        width: 440px;
+        height: 440px;
+        background: rgba(73, 182, 255, 0.14);
+      }
+
+      .halo-b {
+        right: 150px;
+        top: 140px;
+        width: 320px;
+        height: 320px;
+        background: rgba(136, 120, 255, 0.15);
+      }
+
+      .halo-c {
+        left: 660px;
+        bottom: -170px;
+        width: 520px;
+        height: 520px;
+        background: rgba(55, 232, 255, 0.08);
+      }
+
+      .global-orbit {
+        border: 1px solid rgba(73, 182, 255, 0.14);
+        opacity: 0.55;
+      }
+
+      .orbit-a {
+        left: 1240px;
+        top: 190px;
+        width: 300px;
+        height: 300px;
+      }
+
+      .orbit-b {
+        right: 260px;
+        bottom: 120px;
+        width: 180px;
+        height: 180px;
+      }
+
+      .orbit-c {
+        left: 180px;
+        bottom: 180px;
+        width: 240px;
+        height: 240px;
+      }
+
+      .global-vignette {
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.18)),
+          radial-gradient(circle at center, rgba(255, 255, 255, 0) 56%, rgba(0, 0, 0, 0.34) 100%);
+      }
+
+      .chapter-hud {
+        top: 30px;
+        left: 50%;
+        z-index: 200;
+        display: flex;
+        gap: 12px;
+        width: 1240px;
+        transform: translateX(-50%);
+      }
+
+      .hud-step {
+        display: flex;
+        min-width: 0;
+        flex: 1;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 14px;
+        border: 1px solid rgba(40, 80, 126, 0.7);
+        border-radius: 999px;
+        background: rgba(10, 22, 40, 0.62);
+        color: rgba(244, 247, 251, 0.54);
+        opacity: 0.42;
+      }
+
+      .hud-index {
+        display: inline-flex;
+        width: 26px;
+        height: 26px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: rgba(73, 182, 255, 0.12);
+        color: var(--text);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .hud-copy {
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .hud-copy strong {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 16px;
+      }
+
+      .hud-copy span {
+        overflow: hidden;
+        color: rgba(184, 199, 218, 0.84);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .scene {
+        inset: 0;
+        z-index: 20;
+        opacity: 0;
+        overflow: hidden;
+      }
+
+      #scene-1 {
+        opacity: 1;
+        z-index: 30;
+      }
+
+      .scene-shell {
+        inset: 104px 84px 70px;
+        padding: 26px 34px 34px;
+        border: 1px solid rgba(40, 80, 126, 0.58);
+        border-radius: 38px;
+        background:
+          linear-gradient(180deg, rgba(15, 29, 50, 0.94), rgba(9, 18, 32, 0.88)),
+          radial-gradient(circle at 20% 10%, rgba(73, 182, 255, 0.08), rgba(73, 182, 255, 0) 28%);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.04),
+          0 28px 110px rgba(0, 0, 0, 0.34);
+        overflow: hidden;
+      }
+
+      .scene-shell::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0 1px, rgba(255, 255, 255, 0) 1px 128px),
+          repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.016) 0 1px, rgba(255, 255, 255, 0) 1px 96px);
+        opacity: 0.46;
+        pointer-events: none;
+      }
+
+      .scene-grid {
+        inset: 0;
+        pointer-events: none;
+      }
+
+      .scene-ghost {
+        position: absolute;
+        top: 84px;
+        right: 44px;
+      }
+
+      .scene-ghost::after {
+        content: attr(data-ghost);
+        color: rgba(255, 255, 255, 0.04);
+        font-size: 148px;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .chapter-tag {
+        display: inline-flex;
+        width: fit-content;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 16px;
+        border: 1px solid rgba(73, 182, 255, 0.28);
+        border-radius: 999px;
+        background: rgba(73, 182, 255, 0.08);
+        color: var(--blue);
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .chapter-tag .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: currentColor;
+        box-shadow: 0 0 18px currentColor;
+      }
+
+      .scene-head {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        margin-bottom: 30px;
+      }
+
+      .scene-head h1,
+      .scene-head h2 {
+        max-width: 1120px;
+        margin: 0;
+        color: var(--text);
+        font-size: 74px;
+        line-height: 0.98;
+        letter-spacing: -0.04em;
+      }
+
+      .scene-head p {
+        max-width: 930px;
+        margin: 0;
+        color: var(--muted);
+        font-size: 28px;
+        line-height: 1.45;
+      }
+
+      #scene-1 .scene-shell {
+        display: grid;
+        grid-template-columns: 0.92fr 1.08fr;
+        grid-template-rows: auto 1fr;
+        gap: 28px 34px;
+      }
+
+      #scene-1 .scene-head {
+        grid-column: 1;
+        grid-row: 1;
+        margin-top: 26px;
+      }
+
+      .hero-guide {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        align-self: end;
+        width: 540px;
+        padding: 28px 30px;
+        border: 1px solid rgba(136, 120, 255, 0.24);
+        border-radius: 30px;
+        background: rgba(12, 26, 44, 0.82);
+        box-shadow: 0 22px 60px rgba(0, 0, 0, 0.26);
+      }
+
+      .hero-guide .guide-title,
+      .method-card .guide-title,
+      .matrix-guide .guide-title {
+        color: var(--text);
+        font-size: 28px;
+        font-weight: 700;
+      }
+
+      .hero-guide .guide-point,
+      .method-card li,
+      .matrix-guide li {
+        display: flex;
+        gap: 14px;
+        color: var(--muted);
+        font-size: 22px;
+        line-height: 1.45;
+      }
+
+      .guide-num {
+        display: inline-flex;
+        width: 30px;
+        height: 30px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: rgba(73, 182, 255, 0.16);
+        color: var(--text);
+        font-size: 16px;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+
+      .axis-board {
+        position: relative;
+        z-index: 3;
+        display: grid;
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        padding-top: 68px;
+      }
+
+      .axis-column {
+        display: flex;
+        min-height: 742px;
+        flex-direction: column;
+        gap: 18px;
+        padding: 24px 20px 22px;
+        border: 1px solid rgba(40, 80, 126, 0.76);
+        border-radius: 30px;
+        background: rgba(12, 25, 43, 0.78);
+        box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24);
+      }
+
+      .axis-header {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .axis-header strong {
+        color: var(--text);
+        font-size: 34px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+
+      .axis-header span {
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.4;
+      }
+
+      .axis-list {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        gap: 12px;
+      }
+
+      .cloud-word {
+        padding: 12px 14px;
+        border: 1px solid rgba(40, 80, 126, 0.72);
+        border-radius: 16px;
+        color: var(--text);
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        background: rgba(17, 43, 70, 0.72);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      }
+
+      .cloud-word.group-tools {
+        border-color: rgba(73, 182, 255, 0.3);
+        background: rgba(73, 182, 255, 0.08);
+      }
+
+      .cloud-word.group-models {
+        border-color: rgba(136, 120, 255, 0.32);
+        background: rgba(136, 120, 255, 0.08);
+      }
+
+      .cloud-word.group-companies {
+        border-color: rgba(55, 232, 255, 0.28);
+        background: rgba(55, 232, 255, 0.07);
+      }
+
+      #scene-2 .scene-shell,
+      #scene-5 .scene-shell {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .split-layout {
+        position: relative;
+        z-index: 3;
+        display: grid;
+        grid-template-columns: 1.14fr 0.76fr;
+        gap: 28px;
+        flex: 1;
+      }
+
+      .mapping-board,
+      .matrix-board,
+      .lane-stage {
+        position: relative;
+        padding: 24px;
+        border: 1px solid rgba(40, 80, 126, 0.76);
+        border-radius: 30px;
+        background: rgba(10, 23, 40, 0.76);
+        overflow: hidden;
+      }
+
+      .mapping-board::before,
+      .matrix-board::before,
+      .lane-stage::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(73, 182, 255, 0.08), rgba(73, 182, 255, 0)),
+          repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.018) 0 1px, rgba(255, 255, 255, 0) 1px 118px);
+        opacity: 0.56;
+        pointer-events: none;
+      }
+
+      .mapping-grid {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .mapping-lane {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        padding: 18px 16px 16px;
+        border: 1px solid var(--brand-soft);
+        border-radius: 24px;
+        background: rgba(8, 20, 35, 0.88);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+      }
+
+      .mapping-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--text);
+      }
+
+      .brand-mark,
+      .person-mark {
+        display: inline-flex;
+        width: 42px;
+        height: 42px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: var(--brand-soft);
+        color: var(--text);
+        font-size: 16px;
+        font-weight: 800;
+        flex-shrink: 0;
+      }
+
+      .mapping-brand strong {
+        font-size: 24px;
+      }
+
+      .brand-swatches {
+        display: flex;
+        gap: 6px;
+        margin-left: auto;
+      }
+
+      .brand-swatches i {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        opacity: 0.9;
+      }
+
+      .mapping-node {
+        position: relative;
+        padding: 16px 16px 16px 20px;
+        border: 1px solid rgba(40, 80, 126, 0.6);
+        border-radius: 22px;
+        background: rgba(17, 43, 70, 0.44);
+      }
+
+      .mapping-node::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 14px;
+        bottom: 14px;
+        width: 4px;
+        border-radius: 999px;
+        background: var(--brand);
+      }
+
+      .node-label {
+        color: var(--muted);
+        font-size: 15px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .node-value {
+        margin-top: 8px;
+        color: var(--text);
+        font-size: 26px;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      .mapping-tools {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .mini-tool {
+        padding: 8px 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text);
+        font-size: 18px;
+      }
+
+      .method-card,
+      .matrix-guide {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        padding: 30px 30px 28px;
+        border: 1px solid rgba(136, 120, 255, 0.24);
+        border-radius: 30px;
+        background:
+          radial-gradient(circle at 84% 14%, rgba(136, 120, 255, 0.18), rgba(136, 120, 255, 0) 22%),
+          rgba(11, 22, 38, 0.88);
+      }
+
+      .method-card p,
+      .matrix-guide p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 21px;
+        line-height: 1.48;
+      }
+
+      .method-card ol,
+      .matrix-guide ol {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .lane-stage {
+        position: relative;
+        z-index: 3;
+        padding: 28px 26px;
+      }
+
+      .lane-grid {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+        height: 100%;
+      }
+
+      .system-lane {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        padding: 20px 18px 18px;
+        border: 1px solid var(--brand-soft);
+        border-radius: 28px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0)),
+          rgba(8, 20, 35, 0.86);
+        box-shadow:
+          inset 0 0 0 1px rgba(255, 255, 255, 0.02),
+          0 18px 48px rgba(0, 0, 0, 0.22);
+      }
+
+      .lane-top {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .lane-top strong {
+        font-size: 30px;
+      }
+
+      .lane-top span {
+        color: var(--muted);
+        font-size: 18px;
+      }
+
+      .lane-model {
+        position: relative;
+        padding: 18px 18px 18px 22px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 22px;
+        background: rgba(17, 43, 70, 0.44);
+      }
+
+      .lane-model::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 6px;
+        border-radius: 999px;
+        background: var(--brand);
+        box-shadow: 0 0 24px var(--brand);
+      }
+
+      .lane-model .label,
+      .lane-tools .label,
+      .lane-note .label {
+        color: var(--muted);
+        font-size: 14px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .lane-model .value {
+        margin-top: 10px;
+        font-size: 34px;
+        font-weight: 800;
+        line-height: 1.1;
+      }
+
+      .lane-tools {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .tool-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .tool-pill {
+        padding: 10px 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.05);
+        font-size: 19px;
+      }
+
+      .person-card,
+      .lane-note {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 14px 14px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .person-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .person-copy strong {
+        font-size: 18px;
+      }
+
+      .person-copy span,
+      .lane-note span {
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.35;
+      }
+
+      .scene-wide {
+        position: relative;
+        z-index: 3;
+        display: grid;
+        grid-template-columns: 1.2fr 0.62fr;
+        gap: 28px;
+        flex: 1;
+      }
+
+      .matrix-board {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .matrix-header,
+      .matrix-row {
+        display: grid;
+        grid-template-columns: 0.86fr 0.9fr 1.12fr 1.08fr 0.84fr;
+        gap: 12px;
+        align-items: stretch;
+      }
+
+      .matrix-header {
+        position: relative;
+        z-index: 2;
+        padding: 0 2px;
+      }
+
+      .matrix-header div,
+      .matrix-row div {
+        min-width: 0;
+        padding: 14px 16px;
+        border: 1px solid rgba(40, 80, 126, 0.58);
+        border-radius: 16px;
+      }
+
+      .matrix-header div {
+        background: rgba(73, 182, 255, 0.08);
+        color: var(--text);
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .matrix-body {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .matrix-row {
+        position: relative;
+      }
+
+      .matrix-row::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 18px;
+        background: linear-gradient(90deg, var(--brand-soft), rgba(255, 255, 255, 0));
+        opacity: 0.16;
+        pointer-events: none;
+      }
+
+      .matrix-row div {
+        position: relative;
+        background: rgba(11, 26, 44, 0.86);
+        color: var(--text);
+        font-size: 22px;
+        line-height: 1.35;
+      }
+
+      .matrix-row .meta {
+        color: var(--muted);
+        font-size: 18px;
+      }
+
+      .matrix-summary {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .summary-pill {
+        padding: 12px 16px;
+        border: 1px solid rgba(73, 182, 255, 0.24);
+        border-radius: 999px;
+        background: rgba(73, 182, 255, 0.08);
+        color: var(--text);
+        font-size: 18px;
+      }
+
+      .scanner-line {
+        left: 24px;
+        right: 24px;
+        top: 116px;
+        height: 3px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, rgba(73, 182, 255, 0), rgba(73, 182, 255, 1), rgba(73, 182, 255, 0));
+        box-shadow: 0 0 18px rgba(73, 182, 255, 0.8);
+        opacity: 0.75;
+        z-index: 4;
+      }
+
+      #scene-6 .scene-shell {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .closing-wrap {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        width: 1040px;
+        margin: 46px auto 0;
+      }
+
+      .question-card {
+        display: grid;
+        grid-template-columns: 88px 1fr;
+        gap: 20px;
+        align-items: center;
+        padding: 24px 26px;
+        border: 1px solid rgba(40, 80, 126, 0.72);
+        border-radius: 28px;
+        background:
+          linear-gradient(90deg, rgba(73, 182, 255, 0.08), rgba(73, 182, 255, 0)),
+          rgba(11, 24, 40, 0.86);
+      }
+
+      .question-card .num {
+        display: inline-flex;
+        width: 88px;
+        height: 88px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 28px;
+        background: rgba(73, 182, 255, 0.12);
+        color: var(--text);
+        font-size: 36px;
+        font-weight: 800;
+      }
+
+      .question-card strong {
+        font-size: 38px;
+        letter-spacing: -0.02em;
+      }
+
+      .question-card p {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 22px;
+        line-height: 1.45;
+      }
+
+      .closing-network {
+        inset: 86px 180px 180px;
+        pointer-events: none;
+      }
+
+      .network-node,
+      .network-link {
+        position: absolute;
+      }
+
+      .network-node {
+        display: inline-flex;
+        min-width: 122px;
+        justify-content: center;
+        padding: 10px 16px;
+        border: 1px solid rgba(73, 182, 255, 0.2);
+        border-radius: 999px;
+        background: rgba(73, 182, 255, 0.06);
+        color: var(--text);
+        font-size: 18px;
+      }
+
+      .network-link {
+        height: 1px;
+        background: linear-gradient(90deg, rgba(73, 182, 255, 0), rgba(73, 182, 255, 0.6), rgba(73, 182, 255, 0));
+        transform-origin: left center;
+      }
+
+      .closing-footer {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 18px;
+        text-align: center;
+      }
+
+      .closing-footer h2 {
+        margin: 0;
+        font-size: 92px;
+        line-height: 0.92;
+        letter-spacing: -0.05em;
+      }
+
+      .closing-footer p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 28px;
+      }
+
+      .contact-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 18px;
+        border: 1px solid rgba(73, 182, 255, 0.24);
+        border-radius: 999px;
+        background: rgba(73, 182, 255, 0.08);
+        color: var(--text);
+        font-size: 24px;
+      }
+
+      .contact-tag strong {
+        color: var(--blue);
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-8tmw" id="root" data-composition-id="main" data-start="0" data-duration="282.8" data-width="1920" data-height="1080">
+      <audio data-hf-id="hf-7k1i" id="narration" src="narration.wav" data-start="0" data-duration="282.8" data-track-index="0" data-volume="1"></audio>
+
+      <div data-hf-id="hf-9irn" class="global-bg">
+        <div data-hf-id="hf-iob7" class="grid-field"></div>
+        <div data-hf-id="hf-z3pk" class="global-halo halo-a"></div>
+        <div data-hf-id="hf-7rlf" class="global-halo halo-b"></div>
+        <div data-hf-id="hf-3the" class="global-halo halo-c"></div>
+        <div data-hf-id="hf-xp6c" class="global-orbit orbit-a"></div>
+        <div data-hf-id="hf-6d27" class="global-orbit orbit-b"></div>
+        <div data-hf-id="hf-2ey6" class="global-orbit orbit-c"></div>
+      </div>
+      <div data-hf-id="hf-4oy4" class="global-vignette"></div>
+
+      <div data-hf-id="hf-o01o" class="chapter-hud" id="chapter-hud">
+        <div data-hf-id="hf-dqjb" class="hud-step" data-step="1">
+          <span data-hf-id="hf-ofvc" class="hud-index">01</span>
+          <span data-hf-id="hf-yt66" class="hud-copy"><strong data-hf-id="hf-s871">开场钩子</strong><span data-hf-id="hf-lv56">Names feel mixed</span></span>
+        </div>
+        <div data-hf-id="hf-2v1o" class="hud-step" data-step="2">
+          <span data-hf-id="hf-n8y9" class="hud-index">02</span>
+          <span data-hf-id="hf-w9iq" class="hud-copy"><strong data-hf-id="hf-l9se">三层认知</strong><span data-hf-id="hf-nn71">Tool / Model / Company</span></span>
+        </div>
+        <div data-hf-id="hf-3mph" class="hud-step" data-step="3">
+          <span data-hf-id="hf-nn9a" class="hud-index">03</span>
+          <span data-hf-id="hf-wntr" class="hud-copy"><strong data-hf-id="hf-h1zl">海外体系</strong><span data-hf-id="hf-muma">OpenAI / Anthropic / Google</span></span>
+        </div>
+        <div data-hf-id="hf-mef6" class="hud-step" data-step="4">
+          <span data-hf-id="hf-mgc7" class="hud-index">04</span>
+          <span data-hf-id="hf-x24s" class="hud-copy"><strong data-hf-id="hf-8m6e">国内体系</strong><span data-hf-id="hf-g89b">Kimi / DeepSeek / GLM</span></span>
+        </div>
+        <div data-hf-id="hf-qcj7" class="hud-step" data-step="5">
+          <span data-hf-id="hf-mun8" class="hud-index">05</span>
+          <span data-hf-id="hf-xgft" class="hud-copy"><strong data-hf-id="hf-w2if">总表总结</strong><span data-hf-id="hf-7w2u">Map every relation</span></span>
+        </div>
+        <div data-hf-id="hf-honc" class="hud-step" data-step="6">
+          <span data-hf-id="hf-lnq5" class="hud-index">06</span>
+          <span data-hf-id="hf-xuqu" class="hud-copy"><strong data-hf-id="hf-ontz">三个问题</strong><span data-hf-id="hf-6jke">Remember framework</span></span>
+        </div>
+      </div>
+
+      <section data-hf-id="hf-k674" id="scene-1" class="scene">
+        <div data-hf-id="hf-nmux" class="scene-shell">
+          <div data-hf-id="hf-jdys" class="scene-ghost mono" data-ghost="NAME CLOUD"></div>
+          <div data-hf-id="hf-5gif" class="scene-head">
+            <div data-hf-id="hf-iht1" class="chapter-tag" id="s1-kicker"><span data-hf-id="hf-9gry" class="dot"></span>Beat 1 / 开场钩子</div>
+            <h1 data-hf-id="hf-7cid" id="s1-title">为什么这些 AI 名字，总是越看越混？</h1>
+            <p data-hf-id="hf-r7ld" id="s1-copy">
+              Codex、Claude Code、Gemini、Kimi、DeepSeek、GLM 常常被放在一起说，
+              但它们分属不同层级。先别比强弱，先把名字放回正确位置。
+            </p>
+            <div data-hf-id="hf-cyom" class="hero-guide" id="s1-guide">
+              <div data-hf-id="hf-wj6h" class="guide-title">这条视频只做一件事</div>
+              <div data-hf-id="hf-89s5" class="guide-point"><span data-hf-id="hf-09rv" class="guide-num">1</span><span data-hf-id="hf-r4xf">把混乱名字重新归类</span></div>
+              <div data-hf-id="hf-andl" class="guide-point"><span data-hf-id="hf-zvgu" class="guide-num">2</span><span data-hf-id="hf-nsum">看清工具、模型、厂商三层关系</span></div>
+              <div data-hf-id="hf-buao" class="guide-point"><span data-hf-id="hf-zh5t" class="guide-num">3</span><span data-hf-id="hf-1u33">给你一套自己判断新名词的方法</span></div>
+            </div>
+          </div>
+
+          <div data-hf-id="hf-i7tw" class="axis-board">
+            <div data-hf-id="hf-qaad" class="axis-column" id="axis-tools">
+              <div data-hf-id="hf-on0b" class="axis-header">
+                <strong data-hf-id="hf-eqr5">工具 / 入口</strong>
+                <span data-hf-id="hf-v5hl">用户真正打开和操作的位置</span>
+              </div>
+              <div data-hf-id="hf-ha2l" class="axis-list" id="group-tools"></div>
+            </div>
+            <div data-hf-id="hf-m4xe" class="axis-column" id="axis-models">
+              <div data-hf-id="hf-ougr" class="axis-header">
+                <strong data-hf-id="hf-4g59">模型 / 大脑</strong>
+                <span data-hf-id="hf-s1zz">负责推理、生成与代码能力</span>
+              </div>
+              <div data-hf-id="hf-hwtm" class="axis-list" id="group-models"></div>
+            </div>
+            <div data-hf-id="hf-bq9l" class="axis-column" id="axis-companies">
+              <div data-hf-id="hf-og5q" class="axis-header">
+                <strong data-hf-id="hf-tcxx">厂商 / 公司</strong>
+                <span data-hf-id="hf-5fsh">开发、训练与运营整套体系</span>
+              </div>
+              <div data-hf-id="hf-830x" class="axis-list" id="group-companies"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section data-hf-id="hf-v1or" id="scene-2" class="scene">
+        <div data-hf-id="hf-lf0t" class="scene-shell">
+          <div data-hf-id="hf-kl58" class="scene-ghost mono" data-ghost="THREE LAYERS"></div>
+          <div data-hf-id="hf-sdlj" class="scene-head">
+            <div data-hf-id="hf-nfci" class="chapter-tag" id="s2-kicker"><span data-hf-id="hf-zcc2" class="dot"></span>Beat 2 / 三层认知</div>
+            <h2 data-hf-id="hf-9epn" id="s2-title">一个名字，先拆三层：工具、模型、厂商</h2>
+            <p data-hf-id="hf-e6hr" id="s2-copy">
+              判断任何 AI 名字，先看你在哪里用它，再看背后模型是什么，最后看模型是哪家公司做的。
+            </p>
+          </div>
+
+          <div data-hf-id="hf-5hxz" class="split-layout">
+            <div data-hf-id="hf-3kyd" class="mapping-board">
+              <div data-hf-id="hf-koc2" class="mapping-grid" id="mapping-grid"></div>
+            </div>
+            <div data-hf-id="hf-6736" class="method-card" id="method-card">
+              <div data-hf-id="hf-mds6" class="guide-title">最简单判断公式</div>
+              <p data-hf-id="hf-y3cj">别先问它强不强。先问它属于哪一层。</p>
+              <ol data-hf-id="hf-eaxy">
+                <li data-hf-id="hf-a4s6"><span data-hf-id="hf-njgb" class="guide-num">1</span><span data-hf-id="hf-lg3q">我在哪里用它？这通常是工具或入口。</span></li>
+                <li data-hf-id="hf-9x5m"><span data-hf-id="hf-ask2" class="guide-num">2</span><span data-hf-id="hf-xufd">它背后跑什么模型？这是能力核心。</span></li>
+                <li data-hf-id="hf-abgn"><span data-hf-id="hf-iw1h" class="guide-num">3</span><span data-hf-id="hf-mjym">这个模型是谁做的？这才是厂商。</span></li>
+              </ol>
+              <p data-hf-id="hf-mn5q" class="mono">Tool → Model → Company</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section data-hf-id="hf-r3kq" id="scene-3" class="scene">
+        <div data-hf-id="hf-mlxw" class="scene-shell">
+          <div data-hf-id="hf-egs9" class="scene-ghost mono" data-ghost="GLOBAL SYSTEMS"></div>
+          <div data-hf-id="hf-rzai" class="scene-head">
+            <div data-hf-id="hf-lhgh" class="chapter-tag" id="s3-kicker"><span data-hf-id="hf-zqn3" class="dot"></span>Beat 3 / 海外三大体系</div>
+            <h2 data-hf-id="hf-pnzx" id="s3-title">OpenAI、Anthropic、Google：三家公司，三套入口体系</h2>
+            <p data-hf-id="hf-izer" id="s3-copy">
+              海外体系最适合拿来练习拆层。公司、模型、入口分清之后，名字就不再混在一起。
+            </p>
+          </div>
+
+          <div data-hf-id="hf-gzdb" class="lane-stage">
+            <div data-hf-id="hf-3nls" class="lane-grid" id="overseas-grid"></div>
+          </div>
+        </div>
+      </section>
+
+      <section data-hf-id="hf-8bv1" id="scene-4" class="scene">
+        <div data-hf-id="hf-m7mv" class="scene-shell">
+          <div data-hf-id="hf-bn19" class="scene-ghost mono" data-ghost="LOCAL SYSTEMS"></div>
+          <div data-hf-id="hf-rkzh" class="scene-head">
+            <div data-hf-id="hf-t146" class="chapter-tag" id="s4-kicker"><span data-hf-id="hf-04y4" class="dot"></span>Beat 4 / 国内三大体系</div>
+            <h2 data-hf-id="hf-rx58" id="s4-title">Kimi、DeepSeek、GLM：换一批名字，还是同一把尺子</h2>
+            <p data-hf-id="hf-jh1k" id="s4-copy">
+              国内体系看起来更容易混，因为有些名字既像产品名，也像公司品牌。越是这样，越要按三层拆。
+            </p>
+          </div>
+
+          <div data-hf-id="hf-mi3z" class="lane-stage">
+            <div data-hf-id="hf-w4di" class="lane-grid" id="domestic-grid"></div>
+          </div>
+        </div>
+      </section>
+
+      <section data-hf-id="hf-7k78" id="scene-5" class="scene">
+        <div data-hf-id="hf-nejy" class="scene-shell">
+          <div data-hf-id="hf-m55k" class="scene-ghost mono" data-ghost="MASTER TABLE"></div>
+          <div data-hf-id="hf-ud4o" class="scene-head">
+            <div data-hf-id="hf-nz0n" class="chapter-tag" id="s5-kicker"><span data-hf-id="hf-0j95" class="dot"></span>Beat 5 / 总表总结</div>
+            <h2 data-hf-id="hf-b2t8" id="s5-title">一张总表，统一看懂所有对应关系</h2>
+            <p data-hf-id="hf-c2zt" id="s5-copy">
+              同一张表里同时看体系、厂商、模型、入口和代表人物，很多混乱会瞬间消失。
+            </p>
+          </div>
+
+          <div data-hf-id="hf-kfdk" class="scene-wide">
+            <div data-hf-id="hf-f80s" class="matrix-board">
+              <div data-hf-id="hf-ubkw" class="matrix-header" id="matrix-header">
+                <div data-hf-id="hf-efue">体系</div>
+                <div data-hf-id="hf-58u8">厂商</div>
+                <div data-hf-id="hf-kgaw">模型</div>
+                <div data-hf-id="hf-9lh0">入口</div>
+                <div data-hf-id="hf-ocgm">代表人物</div>
+              </div>
+              <div data-hf-id="hf-gnai" class="scanner-line" id="scanner-line"></div>
+              <div data-hf-id="hf-zdva" class="matrix-body" id="matrix-body"></div>
+              <div data-hf-id="hf-c5lu" class="matrix-summary" id="matrix-summary"></div>
+            </div>
+            <div data-hf-id="hf-56ou" class="matrix-guide" id="matrix-guide">
+              <div data-hf-id="hf-dkto" class="guide-title">以后再看 AI 名字</div>
+              <p data-hf-id="hf-89qg">先别问排行榜，先问分类。分类对了，理解速度会快很多。</p>
+              <ol data-hf-id="hf-yp2i">
+                <li data-hf-id="hf-apro"><span data-hf-id="hf-n55a" class="guide-num">1</span><span data-hf-id="hf-9szg">它是工具、模型，还是公司？</span></li>
+                <li data-hf-id="hf-b42p"><span data-hf-id="hf-b6v3" class="guide-num">2</span><span data-hf-id="hf-ac9h">背后调用的模型到底叫什么？</span></li>
+                <li data-hf-id="hf-bidq"><span data-hf-id="hf-k2yk" class="guide-num">3</span><span data-hf-id="hf-taep">负责做这个模型的厂商是谁？</span></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section data-hf-id="hf-g833" id="scene-6" class="scene">
+        <div data-hf-id="hf-n08x" class="scene-shell">
+          <div data-hf-id="hf-w5hl" class="scene-ghost mono" data-ghost="THREE QUESTIONS"></div>
+          <div data-hf-id="hf-0wr6" class="closing-network" id="closing-network"></div>
+          <div data-hf-id="hf-1efm" class="closing-wrap" id="closing-wrap">
+            <div data-hf-id="hf-n3jb" class="question-card">
+              <span data-hf-id="hf-cshg" class="num">01</span>
+              <div data-hf-id="hf-yeow">
+                <strong data-hf-id="hf-bgr5">它是工具、模型，还是公司？</strong>
+                <p data-hf-id="hf-qchd">先判断层级，不要让名字直接混在一起。</p>
+              </div>
+            </div>
+            <div data-hf-id="hf-qcef" class="question-card">
+              <span data-hf-id="hf-blkd" class="num">02</span>
+              <div data-hf-id="hf-y7yw">
+                <strong data-hf-id="hf-7yxy">它背后到底在跑什么模型？</strong>
+                <p data-hf-id="hf-rq74">模型层，决定能力边界、速度、成本和推理特性。</p>
+              </div>
+            </div>
+            <div data-hf-id="hf-py3e" class="question-card">
+              <span data-hf-id="hf-bzve" class="num">03</span>
+              <div data-hf-id="hf-x11t">
+                <strong data-hf-id="hf-jgpx">这个模型是哪家公司做的？</strong>
+                <p data-hf-id="hf-bu1o">看到厂商，才能继续理解品牌、产品线和生态关系。</p>
+              </div>
+            </div>
+          </div>
+
+          <div data-hf-id="hf-k7yy" class="closing-footer" id="closing-footer">
+            <h2 data-hf-id="hf-8b1a">关注文浩 AI</h2>
+            <p data-hf-id="hf-5ypz">持续拆解 AI 工具、AI 编程与商业落地</p>
+            <div data-hf-id="hf-i3fi" class="contact-tag mono">合作咨询 <strong data-hf-id="hf-hsqi">wenhaofree</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <script>
+        const brands = {
+          openai: {
+            primary: "#56F0A9",
+            soft: "rgba(86, 240, 169, 0.22)",
+            swatches: ["#56F0A9"],
+            mono: "OA",
+          },
+          anthropic: {
+            primary: "#FFB56A",
+            soft: "rgba(255, 181, 106, 0.22)",
+            swatches: ["#FFB56A"],
+            mono: "AN",
+          },
+          google: {
+            primary: "#669CFF",
+            soft: "rgba(102, 156, 255, 0.22)",
+            swatches: ["#669CFF", "#FF6B6B", "#FFD166", "#7AE582"],
+            mono: "GO",
+          },
+          moonshot: {
+            primary: "#B48DFF",
+            soft: "rgba(180, 141, 255, 0.22)",
+            swatches: ["#B48DFF"],
+            mono: "KM",
+          },
+          deepseek: {
+            primary: "#63C7FF",
+            soft: "rgba(99, 199, 255, 0.22)",
+            swatches: ["#63C7FF", "#C9D6E7"],
+            mono: "DS",
+          },
+          glm: {
+            primary: "#7C9CFF",
+            soft: "rgba(124, 156, 255, 0.22)",
+            swatches: ["#7C9CFF", "#9EE7FF"],
+            mono: "GL",
+          },
+        };
+
+        const cloudWords = [
+          { text: "Codex", group: "tools" },
+          { text: "Claude Code", group: "tools" },
+          { text: "Gemini App", group: "tools" },
+          { text: "Kimi 客户端", group: "tools" },
+          { text: "DeepSeek App", group: "tools" },
+          { text: "Z.ai", group: "tools" },
+          { text: "GPT-5.5", group: "models" },
+          { text: "Claude Opus 4.8", group: "models" },
+          { text: "Gemini 3.5", group: "models" },
+          { text: "Kimi K2.7 Code", group: "models" },
+          { text: "DeepSeek-V4-Pro", group: "models" },
+          { text: "GLM-5.1", group: "models" },
+          { text: "OpenAI", group: "companies" },
+          { text: "Anthropic", group: "companies" },
+          { text: "Google", group: "companies" },
+          { text: "Moonshot AI", group: "companies" },
+          { text: "DeepSeek", group: "companies" },
+          { text: "智谱 AI", group: "companies" },
+        ];
+
+        const conceptLanes = [
+          { brand: "openai", tool: "ChatGPT", model: "GPT-5.5", company: "OpenAI" },
+          { brand: "openai", tool: "Codex", model: "GPT-5.5", company: "OpenAI" },
+          { brand: "anthropic", tool: "Claude Code", model: "Claude Opus 4.8", company: "Anthropic" },
+          { brand: "google", tool: "AI Studio", model: "Gemini 3.5 Pro", company: "Google" },
+          { brand: "moonshot", tool: "Kimi", model: "Kimi K2.7 Code", company: "Moonshot AI" },
+          { brand: "glm", tool: "Z.ai", model: "GLM-5.1", company: "智谱 AI" },
+        ];
+
+        const overseas = [
+          {
+            brand: "openai",
+            company: "OpenAI",
+            subtitle: "ChatGPT / Codex",
+            model: "GPT-5.5",
+            tools: ["ChatGPT", "Codex"],
+            people: "Sam Altman",
+            note: "同一家厂商，可把同一模型能力拆成不同入口。",
+          },
+          {
+            brand: "anthropic",
+            company: "Anthropic",
+            subtitle: "Claude / Claude Code",
+            model: "Claude Opus 4.8",
+            tools: ["Claude", "Claude Code"],
+            people: "Dario Amodei",
+            note: "Claude 是品牌，Claude Code 是更偏工程任务的入口。",
+          },
+          {
+            brand: "google",
+            company: "Google",
+            subtitle: "Gemini App / Studio / API",
+            model: "Gemini 3.5 Flash / Pro",
+            tools: ["Gemini App", "AI Studio", "Gemini API"],
+            people: "Sundar Pichai / Demis Hassabis",
+            note: "Gemini 既像产品名，也像模型系列名，最容易混层。",
+          },
+        ];
+
+        const domestic = [
+          {
+            brand: "moonshot",
+            company: "Moonshot AI",
+            subtitle: "Kimi 体系",
+            model: "Kimi K2.6 / K2.7 Code",
+            tools: ["Kimi 客户端", "Kimi 网页版", "Kimi API"],
+            people: "杨植麟",
+            note: "Kimi 是入口名，月之暗面才是背后厂商。",
+          },
+          {
+            brand: "deepseek",
+            company: "DeepSeek",
+            subtitle: "公司名也是品牌名",
+            model: "DeepSeek-V4-Pro / V4-Flash",
+            tools: ["网页端", "DeepSeek App", "DeepSeek API"],
+            people: "梁文锋",
+            note: "DeepSeek 最容易出现公司名与产品名重叠。",
+          },
+          {
+            brand: "glm",
+            company: "智谱 AI / Z.ai",
+            subtitle: "GLM 体系",
+            model: "GLM-5.1",
+            tools: ["Z.ai", "插件集成", "API", "AutoGLM"],
+            people: "唐杰 / 张鹏",
+            note: "GLM 是模型，Z.ai / 智谱 AI 是品牌与厂商表达。",
+          },
+        ];
+
+        const matrixRows = [
+          {
+            brand: "openai",
+            system: "Codex / ChatGPT",
+            company: "OpenAI",
+            model: "GPT-5.5",
+            entry: "ChatGPT / Codex",
+            people: "Sam Altman",
+          },
+          {
+            brand: "anthropic",
+            system: "Claude Code",
+            company: "Anthropic",
+            model: "Claude Opus 4.8",
+            entry: "Claude / Claude Code",
+            people: "Dario Amodei",
+          },
+          {
+            brand: "google",
+            system: "Gemini",
+            company: "Google",
+            model: "Gemini 3.5 Flash / Pro",
+            entry: "Gemini App / AI Studio / API",
+            people: "Sundar / Demis",
+          },
+          {
+            brand: "moonshot",
+            system: "Kimi",
+            company: "Moonshot AI",
+            model: "Kimi K2.6 / K2.7 Code",
+            entry: "客户端 / 网页版 / API",
+            people: "杨植麟",
+          },
+          {
+            brand: "deepseek",
+            system: "DeepSeek",
+            company: "DeepSeek",
+            model: "DeepSeek-V4-Pro / V4-Flash",
+            entry: "网页 / App / API",
+            people: "梁文锋",
+          },
+          {
+            brand: "glm",
+            system: "GLM",
+            company: "智谱 AI / Z.ai",
+            model: "GLM-5.1",
+            entry: "Z.ai / 插件 / API / AutoGLM",
+            people: "唐杰 / 张鹏",
+          },
+        ];
+
+        const summaryPills = [
+          "先分层，再评价",
+          "工具 = 使用入口",
+          "模型 = 能力核心",
+          "厂商 = 背后公司",
+          "看新名词，也能自己拆",
+        ];
+
+        const networkNodes = [
+          { text: "工具", x: 120, y: 70 },
+          { text: "模型", x: 480, y: 10 },
+          { text: "厂商", x: 880, y: 90 },
+          { text: "Codex", x: 50, y: 250 },
+          { text: "Claude Code", x: 330, y: 220 },
+          { text: "Gemini", x: 650, y: 250 },
+          { text: "Kimi", x: 10, y: 430 },
+          { text: "DeepSeek", x: 420, y: 420 },
+          { text: "GLM", x: 770, y: 420 },
+        ];
+
+        function swatches(palette) {
+          return palette.swatches.map((color) => `<i style="background:${color}"></i>`).join("");
+        }
+
+        function setBrandVars(brand) {
+          const palette = brands[brand];
+          return `style="--brand:${palette.primary};--brand-soft:${palette.soft}"`;
+        }
+
+        function renderCloud() {
+          const groups = {
+            tools: document.getElementById("group-tools"),
+            models: document.getElementById("group-models"),
+            companies: document.getElementById("group-companies"),
+          };
+
+          cloudWords.forEach((word) => {
+            const chip = document.createElement("div");
+            chip.className = `cloud-word group-${word.group}`;
+            chip.textContent = word.text;
+            groups[word.group].appendChild(chip);
+          });
+        }
+
+        function renderConceptGrid() {
+          const grid = document.getElementById("mapping-grid");
+          grid.innerHTML = conceptLanes
+            .map((lane) => {
+              const palette = brands[lane.brand];
+              return `
+                <div class="mapping-lane" ${setBrandVars(lane.brand)}>
+                  <div class="mapping-brand">
+                    <span class="brand-mark">${palette.mono}</span>
+                    <strong>${lane.company}</strong>
+                    <span class="brand-swatches">${swatches(palette)}</span>
+                  </div>
+                  <div class="mapping-node">
+                    <div class="node-label mono">Tool</div>
+                    <div class="node-value">${lane.tool}</div>
+                  </div>
+                  <div class="mapping-node">
+                    <div class="node-label mono">Model</div>
+                    <div class="node-value">${lane.model}</div>
+                  </div>
+                  <div class="mapping-node">
+                    <div class="node-label mono">Company</div>
+                    <div class="node-value">${lane.company}</div>
+                  </div>
+                </div>
+              `;
+            })
+            .join("");
+        }
+
+        function renderSystemLanes(targetId, items) {
+          const grid = document.getElementById(targetId);
+          grid.innerHTML = items
+            .map((item) => {
+              const palette = brands[item.brand];
+              const toolStack = item.tools.map((tool) => `<span class="tool-pill">${tool}</span>`).join("");
+              return `
+                <div class="system-lane" ${setBrandVars(item.brand)}>
+                  <div class="lane-top">
+                    <span class="brand-mark">${palette.mono}</span>
+                    <div>
+                      <strong>${item.company}</strong>
+                      <span>${item.subtitle}</span>
+                    </div>
+                    <span class="brand-swatches">${swatches(palette)}</span>
+                  </div>
+
+                  <div class="lane-model">
+                    <div class="label mono">Model</div>
+                    <div class="value">${item.model}</div>
+                  </div>
+
+                  <div class="lane-tools">
+                    <div class="label mono">Entry</div>
+                    <div class="tool-stack">${toolStack}</div>
+                  </div>
+
+                  <div class="person-card">
+                    <span class="person-mark">${item.people.slice(0, 2)}</span>
+                    <div class="person-copy">
+                      <strong>代表人物</strong>
+                      <span>${item.people}</span>
+                    </div>
+                  </div>
+
+                  <div class="lane-note">
+                    <span class="guide-num">i</span>
+                    <span>${item.note}</span>
+                  </div>
+                </div>
+              `;
+            })
+            .join("");
+        }
+
+        function renderMatrix() {
+          document.getElementById("matrix-body").innerHTML = matrixRows
+            .map((row) => `
+              <div class="matrix-row" ${setBrandVars(row.brand)}>
+                <div>${row.system}</div>
+                <div>${row.company}</div>
+                <div>${row.model}</div>
+                <div>${row.entry}</div>
+                <div class="meta">${row.people}</div>
+              </div>
+            `)
+            .join("");
+
+          document.getElementById("matrix-summary").innerHTML = summaryPills
+            .map((pill) => `<div class="summary-pill">${pill}</div>`)
+            .join("");
+        }
+
+        function renderNetwork() {
+          const network = document.getElementById("closing-network");
+          const links = [
+            [0, 1],
+            [1, 2],
+            [0, 3],
+            [1, 4],
+            [1, 5],
+            [0, 6],
+            [2, 7],
+            [2, 8],
+          ];
+
+          network.innerHTML =
+            links
+              .map(([fromIndex, toIndex]) => {
+                const from = networkNodes[fromIndex];
+                const to = networkNodes[toIndex];
+                const dx = to.x - from.x;
+                const dy = to.y - from.y;
+                const width = Math.hypot(dx, dy);
+                const angle = (Math.atan2(dy, dx) * 180) / Math.PI;
+                return `<div class="network-link" style="left:${from.x + 78}px;top:${from.y + 24}px;width:${width}px;transform:rotate(${angle}deg)"></div>`;
+              })
+              .join("") +
+            networkNodes
+              .map(
+                (node) =>
+                  `<div class="network-node" style="left:${node.x}px;top:${node.y}px">${node.text}</div>`,
+              )
+              .join("");
+        }
+
+        renderCloud();
+        renderConceptGrid();
+        renderSystemLanes("overseas-grid", overseas);
+        renderSystemLanes("domestic-grid", domestic);
+        renderMatrix();
+        renderNetwork();
+
+        window.__timelines = window.__timelines || {};
+
+        const marks = {
+          s1: 0,
+          s2: 28,
+          s3: 72,
+          s4: 126,
+          s5: 181,
+          s6: 250,
+          end: 282.8,
+        };
+
+        function blurTransition(tl, oldSel, newSel, at, duration = 0.75, blur = 12) {
+          tl.to(
+            oldSel,
+            {
+              filter: `blur(${blur}px)`,
+              scale: 1.025,
+              opacity: 0,
+              duration,
+              ease: "power2.inOut",
+            },
+            at,
+          );
+          tl.fromTo(
+            newSel,
+            {
+              filter: `blur(${blur}px)`,
+              scale: 0.975,
+              opacity: 0,
+            },
+            {
+              filter: "blur(0px)",
+              scale: 1,
+              opacity: 1,
+              duration,
+              ease: "power2.inOut",
+            },
+            at + 0.08,
+          );
+        }
+
+        function cueHud(tl, step, at) {
+          tl.to(
+            ".hud-step",
+            {
+              opacity: 0.42,
+              duration: 0.3,
+              ease: "power1.out",
+              backgroundColor: "rgba(10, 22, 40, 0.62)",
+              borderColor: "rgba(40, 80, 126, 0.7)",
+            },
+            at,
+          );
+          tl.to(
+            `.hud-step[data-step="${step}"]`,
+            {
+              opacity: 1,
+              duration: 0.42,
+              ease: "power3.out",
+              scale: 1.02,
+              backgroundColor: "rgba(73, 182, 255, 0.16)",
+              borderColor: "#49B6FF",
+            },
+            at,
+          );
+        }
+
+        const tl = gsap.timeline({ paused: true });
+
+        window.addEventListener(
+          "error",
+          (event) => {
+            const target = event.target;
+            if (!target || target === window) return;
+            const url = target.currentSrc || target.src || target.href;
+            if (!url) return;
+            console.warn("[resource-error]", target.tagName, url);
+          },
+          true,
+        );
+
+        cueHud(tl, 1, 0.2);
+
+        tl.to(".grid-field", { x: 42, y: 24, duration: 34, ease: "sine.inOut", yoyo: true, repeat: 8 }, 0);
+        tl.to(".halo-a", { x: 70, y: 24, duration: 28, ease: "sine.inOut", yoyo: true, repeat: 8 }, 0);
+        tl.to(".halo-b", { x: -64, y: 16, duration: 24, ease: "sine.inOut", yoyo: true, repeat: 10 }, 0.6);
+        tl.to(".halo-c", { x: 26, y: -40, duration: 32, ease: "sine.inOut", yoyo: true, repeat: 8 }, 0.2);
+        tl.to(".orbit-a", { rotation: 10, duration: 20, transformOrigin: "50% 50%", ease: "sine.inOut", yoyo: true, repeat: 12 }, 0);
+        tl.to(".orbit-b", { rotation: -12, duration: 18, transformOrigin: "50% 50%", ease: "sine.inOut", yoyo: true, repeat: 14 }, 0.4);
+        tl.to(".orbit-c", { rotation: 16, duration: 22, transformOrigin: "50% 50%", ease: "sine.inOut", yoyo: true, repeat: 12 }, 0.2);
+
+        tl.fromTo("#s1-kicker", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 0.45);
+        tl.fromTo("#s1-title", { y: 44, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "expo.out" }, 0.75);
+        tl.fromTo("#s1-copy", { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power2.out" }, 1.15);
+        tl.fromTo(".axis-column", { y: 64, opacity: 0, scale: 0.96 }, { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "power3.out", stagger: 0.14 }, 4.2);
+        tl.fromTo(
+          ".cloud-word",
+          {
+            x: (index) => [320, -280, 220, -210, 260, -180, 290, -260, 240, -250, 210, -190, 300, -280, 250, -240, 220, -200][index],
+            y: (index) => [-180, -140, 180, 140, -210, 160, -170, 190, -160, 170, -140, 210, -150, 150, -190, 180, -160, 200][index],
+            rotation: (index) => [18, -14, 10, -9, 16, -18, 12, -12, 9, -14, 11, -10, 13, -15, 8, -11, 12, -13][index],
+            opacity: 0,
+          },
+          {
+            x: 0,
+            y: 0,
+            rotation: 0,
+            opacity: 1,
+            duration: 0.9,
+            ease: "expo.out",
+            stagger: 0.06,
+          },
+          5.0,
+        );
+        tl.fromTo("#s1-guide .guide-point", { x: -24, opacity: 0 }, { x: 0, opacity: 1, duration: 0.52, ease: "power3.out", stagger: 0.18 }, 7.1);
+        tl.to("#axis-tools .axis-header", { boxShadow: "0 0 32px rgba(73, 182, 255, 0.24)", duration: 1.2, ease: "sine.inOut", yoyo: true, repeat: 2 }, 11.4);
+        tl.to("#axis-models .axis-header", { boxShadow: "0 0 32px rgba(136, 120, 255, 0.28)", duration: 1.2, ease: "sine.inOut", yoyo: true, repeat: 2 }, 15.2);
+        tl.to("#axis-companies .axis-header", { boxShadow: "0 0 32px rgba(55, 232, 255, 0.26)", duration: 1.2, ease: "sine.inOut", yoyo: true, repeat: 2 }, 19.0);
+
+        blurTransition(tl, "#scene-1", "#scene-2", 27.15, 0.8, 12);
+        cueHud(tl, 2, 27.5);
+        tl.fromTo("#s2-kicker", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 28.45);
+        tl.fromTo("#s2-title", { y: 38, opacity: 0 }, { y: 0, opacity: 1, duration: 0.78, ease: "expo.out" }, 28.8);
+        tl.fromTo("#s2-copy", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.64, ease: "power2.out" }, 29.1);
+        tl.fromTo(".mapping-lane", { y: 46, opacity: 0, scale: 0.96 }, { y: 0, opacity: 1, scale: 1, duration: 0.72, ease: "power3.out", stagger: 0.11 }, 30.6);
+        tl.fromTo("#method-card", { x: 42, opacity: 0 }, { x: 0, opacity: 1, duration: 0.7, ease: "power2.out" }, 31.15);
+        tl.to(".mapping-lane", { boxShadow: "0 0 42px rgba(73, 182, 255, 0.16)", duration: 1.15, ease: "sine.inOut", yoyo: true, repeat: 1, stagger: 0.38 }, 35.4);
+        tl.to(".mapping-node", { y: -6, duration: 1.2, ease: "sine.inOut", yoyo: true, repeat: 2, stagger: 0.04 }, 39.6);
+
+        blurTransition(tl, "#scene-2", "#scene-3", 71.2, 0.75, 11);
+        cueHud(tl, 3, 71.55);
+        tl.fromTo("#s3-kicker", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 72.45);
+        tl.fromTo("#s3-title", { y: 36, opacity: 0 }, { y: 0, opacity: 1, duration: 0.82, ease: "expo.out" }, 72.8);
+        tl.fromTo("#s3-copy", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.62, ease: "power2.out" }, 73.05);
+        tl.fromTo("#overseas-grid .system-lane", { y: 54, opacity: 0, scale: 0.96 }, { y: 0, opacity: 1, scale: 1, duration: 0.82, ease: "power3.out", stagger: 0.14 }, 74.0);
+        tl.to("#overseas-grid .system-lane:nth-child(1)", { boxShadow: "0 0 54px rgba(86, 240, 169, 0.18)", duration: 1.4, ease: "sine.inOut", yoyo: true, repeat: 1 }, 82.0);
+        tl.to("#overseas-grid .system-lane:nth-child(2)", { boxShadow: "0 0 54px rgba(255, 181, 106, 0.18)", duration: 1.4, ease: "sine.inOut", yoyo: true, repeat: 1 }, 94.0);
+        tl.to("#overseas-grid .system-lane:nth-child(3)", { boxShadow: "0 0 54px rgba(102, 156, 255, 0.18)", duration: 1.4, ease: "sine.inOut", yoyo: true, repeat: 1 }, 106.0);
+        tl.to("#overseas-grid .tool-pill", { y: -4, duration: 0.9, ease: "sine.inOut", yoyo: true, repeat: 3, stagger: 0.06 }, 87.0);
+
+        blurTransition(tl, "#scene-3", "#scene-4", 125.2, 0.75, 11);
+        cueHud(tl, 4, 125.55);
+        tl.fromTo("#s4-kicker", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 126.45);
+        tl.fromTo("#s4-title", { y: 36, opacity: 0 }, { y: 0, opacity: 1, duration: 0.82, ease: "expo.out" }, 126.8);
+        tl.fromTo("#s4-copy", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.62, ease: "power2.out" }, 127.05);
+        tl.fromTo("#domestic-grid .system-lane", { x: (index) => (index === 1 ? 0 : index === 0 ? -48 : 48), y: 38, opacity: 0, scale: 0.97 }, { x: 0, y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "power3.out", stagger: 0.12 }, 128.0);
+        tl.to("#domestic-grid .system-lane:nth-child(1)", { boxShadow: "0 0 54px rgba(180, 141, 255, 0.2)", duration: 1.4, ease: "sine.inOut", yoyo: true, repeat: 1 }, 136.0);
+        tl.to("#domestic-grid .system-lane:nth-child(2)", { boxShadow: "0 0 54px rgba(99, 199, 255, 0.2)", duration: 1.4, ease: "sine.inOut", yoyo: true, repeat: 1 }, 148.0);
+        tl.to("#domestic-grid .system-lane:nth-child(3)", { boxShadow: "0 0 54px rgba(124, 156, 255, 0.2)", duration: 1.4, ease: "sine.inOut", yoyo: true, repeat: 1 }, 160.0);
+        tl.to("#domestic-grid .lane-note", { y: -5, duration: 1.05, ease: "sine.inOut", yoyo: true, repeat: 2, stagger: 0.22 }, 141.0);
+
+        blurTransition(tl, "#scene-4", "#scene-5", 180.15, 0.82, 12);
+        cueHud(tl, 5, 180.55);
+        tl.fromTo("#s5-kicker", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 181.45);
+        tl.fromTo("#s5-title", { y: 38, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "expo.out" }, 181.8);
+        tl.fromTo("#s5-copy", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.64, ease: "power2.out" }, 182.08);
+        tl.fromTo("#matrix-header div", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.54, ease: "power2.out", stagger: 0.06 }, 183.2);
+        tl.fromTo("#matrix-body .matrix-row", { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.62, ease: "power3.out", stagger: 0.14 }, 184.0);
+        tl.fromTo("#matrix-guide", { x: 36, opacity: 0 }, { x: 0, opacity: 1, duration: 0.72, ease: "power2.out" }, 184.45);
+        tl.fromTo("#matrix-summary .summary-pill", { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.52, ease: "power2.out", stagger: 0.08 }, 188.2);
+        tl.to("#scanner-line", { y: 448, duration: 42, ease: "none" }, 190.0);
+        tl.to("#matrix-body .matrix-row:nth-child(1)", { boxShadow: "0 0 34px rgba(86, 240, 169, 0.18)", duration: 1.0, ease: "sine.inOut", yoyo: true, repeat: 1 }, 194.0);
+        tl.to("#matrix-body .matrix-row:nth-child(2)", { boxShadow: "0 0 34px rgba(255, 181, 106, 0.18)", duration: 1.0, ease: "sine.inOut", yoyo: true, repeat: 1 }, 202.0);
+        tl.to("#matrix-body .matrix-row:nth-child(3)", { boxShadow: "0 0 34px rgba(102, 156, 255, 0.18)", duration: 1.0, ease: "sine.inOut", yoyo: true, repeat: 1 }, 210.0);
+        tl.to("#matrix-body .matrix-row:nth-child(4)", { boxShadow: "0 0 34px rgba(180, 141, 255, 0.18)", duration: 1.0, ease: "sine.inOut", yoyo: true, repeat: 1 }, 218.0);
+        tl.to("#matrix-body .matrix-row:nth-child(5)", { boxShadow: "0 0 34px rgba(99, 199, 255, 0.18)", duration: 1.0, ease: "sine.inOut", yoyo: true, repeat: 1 }, 226.0);
+        tl.to("#matrix-body .matrix-row:nth-child(6)", { boxShadow: "0 0 34px rgba(124, 156, 255, 0.18)", duration: 1.0, ease: "sine.inOut", yoyo: true, repeat: 1 }, 234.0);
+
+        blurTransition(tl, "#scene-5", "#scene-6", 249.0, 0.9, 14);
+        cueHud(tl, 6, 249.35);
+        tl.fromTo("#closing-wrap .question-card", { y: 36, opacity: 0, scale: 0.97 }, { y: 0, opacity: 1, scale: 1, duration: 0.72, ease: "power3.out", stagger: 0.16 }, 250.55);
+        tl.fromTo("#closing-footer h2", { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.74, ease: "expo.out" }, 252.1);
+        tl.fromTo("#closing-footer p", { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.58, ease: "power2.out" }, 252.45);
+        tl.fromTo(".contact-tag", { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.58, ease: "back.out(1.4)" }, 252.75);
+        tl.to(".network-node", { y: -8, duration: 2.2, ease: "sine.inOut", yoyo: true, repeat: 4, stagger: 0.06 }, 254.2);
+        tl.to(".network-link", { opacity: 0.34, duration: 1.8, ease: "sine.inOut", yoyo: true, repeat: 5, stagger: 0.04 }, 254.6);
+        tl.to("#scene-6", { opacity: 0, duration: 1.1, ease: "power1.inOut" }, 281.6);
+
+        window.__timelines["main"] = tl;
+
+        const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+        const debugAt = Number(hashParams.get("at"));
+        if (Number.isFinite(debugAt)) {
+          requestAnimationFrame(() => {
+            tl.time(Math.max(0, Math.min(marks.end, debugAt)));
+          });
+        }
+      </script>
+    </div>
+  </body>
+</html>
